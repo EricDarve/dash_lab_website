@@ -10,5 +10,13 @@ sourceUrl: https://eliseyang.me/
 placeholder: false
 ---
 
-Optical imaging algorithms for multimaterial additive manufacturing.
-<!-- Role sourced from https://eliseyang.me/; description provided directly by Elise. -->
+I am a Mechanical Engineering PhD student at Stanford University with a
+BS in Mechanical Engineering and a minor in Computer Science from
+Columbia University.
+
+My interests lie in applying data-driven computational techniques to
+optimize mechanical engineering processes, such as optical imaging
+algorithms for multimaterial additive manufacturing. I aim to further
+integrate computer science and algorithms to enhance industrial
+efficiency and innovation.
+<!-- Bio provided via Kirill, 2026-08-20. -->
