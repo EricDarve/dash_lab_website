@@ -6,11 +6,13 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  narrow?: boolean;
 }
 
 const {
   title,
   description = "DASH Lab is Eric Darve's research group at Stanford University, working on machine learning and numerical methods for science and engineering.",
+  narrow = false,
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -30,6 +32,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer narrow={narrow} />
   </body>
 </html>

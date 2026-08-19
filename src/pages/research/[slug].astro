@@ -38,7 +38,7 @@ const initials = (name: string) =>
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
-<BaseLayout title={area.title} description={area.description}>
+<BaseLayout title={area.title} description={area.description} narrow>
   <section class="section member-page" id="top">
     <div class="container member-container">
       <BackPill href={`${base}/#research`} />
