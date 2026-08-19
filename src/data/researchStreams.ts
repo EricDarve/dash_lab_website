@@ -33,6 +33,10 @@ export const researchStreams = [
     label: "Interpretability",
   },
   {
+    slug: "ai-safety",
+    label: "AI Safety",
+  },
+  {
     slug: "ai-for-science",
     label: "AI for Science",
   },

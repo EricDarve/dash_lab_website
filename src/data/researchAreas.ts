@@ -14,7 +14,7 @@ export const researchAreas = [
       "Methods for understanding model representations, diagnosing failure modes, and making advanced AI systems more trustworthy.",
     sourceUrl: "https://icme.stanford.edu/people/eric-darve",
     slug: "interpretability",
-    pills: ["interpretability"],
+    pills: ["interpretability", "ai-safety"],
   },
   {
     title: "Scientific Machine Learning",
