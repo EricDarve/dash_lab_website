@@ -1,0 +1,85 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { researchAreas } from "../../data/researchAreas";
+import { researchStreamLabel } from "../../data/researchStreams";
+
+export async function getStaticPaths() {
+  return researchAreas.map((area) => ({
+    params: { slug: area.slug },
+    props: { area },
+  }));
+}
+
+const { area } = Astro.props;
+
+const people = await getCollection("people");
+const relatedPeople = people
+  .filter(
+    (person) =>
+      !person.data.placeholder &&
+      person.data.category !== "alumni" &&
+      person.data.pills?.some((slug) => area.pills.includes(slug))
+  )
+  .sort((a, b) => a.data.name.localeCompare(b.data.name));
+
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+---
+
+<BaseLayout title={area.title} description={area.description}>
+  <section class="section member-page" id="top">
+    <div class="container member-container">
+      <a href="/#research" class="back-link">&larr; DASH Lab</a>
+
+      <div style="margin-top: 28px;">
+        <div class="pill-row">
+          {area.pills.map((slug) => (
+            <span class="tag">{researchStreamLabel(slug)}</span>
+          ))}
+        </div>
+        <h1 class="research-title" style="margin-top: 14px;">{area.title}</h1>
+      </div>
+
+      <p class="lede" style="margin-top: 16px; font-size: 1.05rem; max-width: 560px;">
+        {area.description}
+      </p>
+
+      {relatedPeople.length > 0 && (
+        <div style="margin-top: 48px;">
+          <p class="eyebrow">People in this area</p>
+          <div class="people-grid" style="margin-top: 16px;">
+            {relatedPeople.map((person) => (
+              <a href={`/member/${person.id}`} class="person-card">
+                <div class="person-meta">
+                  {person.data.photo ? (
+                    <img src={person.data.photo} alt={person.data.name} class="avatar" />
+                  ) : (
+                    <div class="avatar avatar--initials">{initials(person.data.name)}</div>
+                  )}
+                  <div class="person-meta__text">
+                    <h3 class="row__title">{person.data.name}</h3>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .research-title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+</style>

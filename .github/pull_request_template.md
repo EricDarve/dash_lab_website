@@ -1,0 +1,4 @@
+- [ ] Frontmatter includes `name`, `role`, `category`, and 1-3 `pills` from `src/data/researchStreams.ts`
+- [ ] Bio is 2-4 sentences, written by the person themselves
+- [ ] Any factual claim (award, grant, publication) has a source
+- [ ] `npm run build` passes locally

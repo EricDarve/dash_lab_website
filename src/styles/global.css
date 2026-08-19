@@ -1,0 +1,626 @@
+/* Design tokens
+   Palette: Stanford Cardinal (#8C1515) used sparingly as accent, against
+   an Apple-style neutral scale (near-black ink, secondary gray, hairline
+   borders, off-white section backgrounds). */
+:root {
+  --cardinal: #8c1515;
+  --cardinal-dark: #691010;
+  --ink: #1d1d1f;
+  --ink-soft: #3c3c41;
+  --ink-secondary: #6e6e73;
+  --paper: #ffffff;
+  --paper-alt: #f5f5f7;
+  --border: #d2d2d7;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter",
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --container: 1120px;
+  --radius: 18px;
+  --radius-sm: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 88px 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  scroll-margin-top: 76px;
+}
+
+.section > .container {
+  width: 100%;
+}
+
+.hero {
+  min-height: calc(100vh - 76px);
+  min-height: calc(100dvh - 76px);
+}
+
+.hero__content {
+  will-change: opacity;
+}
+
+@media (max-width: 860px) {
+  .section {
+    min-height: 0;
+  }
+}
+
+.eyebrow {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cardinal);
+  margin: 0 0 12px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.1;
+}
+
+h3 {
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+p {
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.lede {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  max-width: 640px;
+}
+
+.lede a {
+  color: var(--cardinal);
+  text-decoration: none;
+}
+
+.lede a:hover {
+  text-decoration: underline;
+}
+
+.accent {
+  color: var(--cardinal);
+}
+
+.hero-tagline {
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: -0.01em;
+  max-width: 640px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn--primary {
+  background: var(--cardinal);
+  color: var(--paper);
+}
+
+.btn--primary:hover {
+  background: var(--cardinal-dark);
+}
+
+.btn--ghost {
+  border: 1px solid var(--border);
+  color: var(--ink);
+}
+
+.btn--ghost:hover {
+  border-color: var(--ink-secondary);
+}
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.card:hover {
+  border-color: var(--ink-secondary);
+}
+
+.grid {
+  display: grid;
+  gap: 24px;
+}
+
+.grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 860px) {
+  .grid--3,
+  .grid--2 {
+    grid-template-columns: 1fr;
+  }
+  .section {
+    padding: 56px 0;
+  }
+}
+
+/* Flowing full-width row list — replaces boxed card grids for
+   research areas, affiliations, news, and publications, so
+   information reads as one continuous scroll rather than tiled boxes. */
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) 1fr;
+  align-items: center;
+  gap: 32px;
+  padding: 36px 0;
+  border-top: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Research overview.
+   An editorial two-column list rather than a card grid: title left,
+   description right, no rules between areas — whitespace alone separates
+   them. Rows are links to /research/<slug> and hover like the News list
+   (title tints cardinal via the global a.row:hover rule; no band, no
+   chevron). Everything is scoped to #research / .research-*. */
+#research {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+/* Long headline, so balance the line break rather than leaving an orphan.
+   Size stays on the global h2 scale to match People and News. */
+.research-headline {
+  text-wrap: balance;
+  max-width: 20ch;
+}
+
+.research-intro {
+  margin-top: 16px;
+  max-width: 620px;
+}
+
+.research-list {
+  list-style: none;
+  margin: 56px 0 0;
+  padding: 0;
+}
+
+#research .research-row {
+  grid-template-columns: minmax(260px, 340px) 1fr;
+  grid-template-areas: "title body";
+  align-items: baseline;
+  gap: 40px;
+  padding: 28px 0;
+  border: none;
+}
+
+/* `pretty`, not `balance`: balancing pushed the ampersand in "Uncertainty
+   quantification & anomaly detection" onto the start of line two. `pretty`
+   keeps it at the end of line one and still guards against orphans. Neither
+   setting avoids the break inside "high-performance"; that is a real hyphen,
+   so the line ends "high-" and no stub word is left behind. */
+.research-row__title {
+  grid-area: title;
+  line-height: 1.25;
+  text-wrap: pretty;
+}
+
+.research-row__body {
+  grid-area: body;
+}
+
+#research .research-row__desc {
+  max-width: 60ch;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+#research .research-row__pills {
+  margin-top: 14px;
+}
+
+#research .research-row:focus-visible {
+  outline: 2px solid var(--cardinal);
+  outline-offset: 2px;
+}
+
+/* Tablet: keep two columns, tighten the gap and the title measure. */
+@media (max-width: 860px) {
+  #research .research-row {
+    grid-template-columns: minmax(200px, 260px) 1fr;
+    gap: 28px;
+    padding: 24px 0;
+  }
+
+  .research-row__title {
+    font-size: 1.125rem;
+  }
+}
+
+/* Mobile: title above description, single column. */
+@media (max-width: 700px) {
+  #research .research-row {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "body";
+    align-items: start;
+    gap: 10px;
+    padding: 20px 0;
+  }
+
+  .research-list {
+    margin-top: 40px;
+  }
+
+  #research .research-row__desc {
+    max-width: none;
+  }
+}
+
+.stack > .row:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.row__index {
+  display: block;
+  color: var(--cardinal);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.row__title {
+  margin: 0;
+}
+
+.row a.row:hover .row__title,
+a.row:hover .row__title {
+  color: var(--cardinal);
+}
+
+.row__desc {
+  margin: 0;
+}
+
+.row__desc + .row__desc {
+  margin-top: 6px;
+}
+
+.row__link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--cardinal);
+  text-decoration: none;
+}
+
+@media (max-width: 700px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 28px 0;
+  }
+}
+
+.band--cardinal {
+  background: rgba(140, 21, 21, 0.05);
+  border: 1px solid rgba(140, 21, 21, 0.15);
+  border-radius: var(--radius);
+  padding: 40px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  background: var(--paper-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.tag[data-pill] {
+  cursor: pointer;
+}
+
+.tag:hover {
+  background: var(--border);
+  color: var(--ink);
+}
+
+.tag--active,
+.tag--active:hover {
+  background: var(--cardinal);
+  border-color: var(--cardinal);
+  color: var(--paper);
+}
+
+
+.placeholder-card {
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  color: var(--ink-secondary);
+  font-size: 14px;
+}
+
+.source-note {
+  font-size: 12px;
+  color: var(--ink-secondary);
+  opacity: 0.7;
+}
+
+.people-group__heading {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cardinal);
+}
+
+.people-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px 28px;
+}
+
+.person-card {
+  display: block;
+  width: 168px;
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+  transition: opacity 0.15s ease;
+}
+
+.person-card--match .avatar {
+  box-shadow: 0 0 0 2px var(--cardinal);
+}
+
+.person-card--match .row__title {
+  color: var(--cardinal);
+}
+
+.person-card .avatar {
+  transition: box-shadow 0.2s ease;
+}
+
+.person-card:hover .avatar {
+  box-shadow: 0 0 0 2px var(--cardinal);
+}
+
+.person-card:focus-visible .avatar {
+  box-shadow: 0 0 0 2px var(--cardinal);
+}
+
+.person-card:hover .row__title {
+  color: var(--cardinal);
+}
+
+.person-card .row__title {
+  font-size: 1rem;
+}
+
+.person-card--placeholder {
+  cursor: default;
+}
+
+.person-card--placeholder:hover .avatar {
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.person-card--placeholder:hover .row__title {
+  color: inherit;
+}
+
+.avatar--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1.5px dashed var(--border);
+  box-shadow: none;
+  color: var(--ink-secondary);
+  font-size: 22px;
+  font-weight: 300;
+}
+
+.person-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.person-meta__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.avatar--lg {
+  width: 96px;
+  height: 96px;
+}
+
+.avatar--initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(140, 21, 21, 0.08);
+  color: var(--cardinal);
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.avatar--lg.avatar--initials {
+  font-size: 26px;
+}
+
+.member-container {
+  max-width: 640px;
+}
+
+.member-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 14px;
+  color: var(--ink-secondary);
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--cardinal);
+}
+
+.member-page {
+  min-height: 0;
+  align-items: flex-start;
+  padding: 56px 0 96px;
+}
+
+.member-name {
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.member-role {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.member-bio {
+  max-width: 480px;
+  font-size: 0.95rem;
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pill-row--center {
+  justify-content: center;
+}
+
+.person-bio p {
+  margin: 0;
+}
+
+.person-bio p + p {
+  margin-top: 12px;
+}
+
+.person-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+}
+
+.person-links a {
+  color: var(--cardinal);
+  text-decoration: none;
+}
+
+.person-links a:hover {
+  text-decoration: underline;
+}

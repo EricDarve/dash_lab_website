@@ -1,0 +1,196 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { researchAreas } from "../data/researchAreas";
+import { researchStreamLabel } from "../data/researchStreams";
+
+const news = (await getCollection("news")).sort((a, b) =>
+  b.data.date.localeCompare(a.data.date)
+);
+const people = await getCollection("people");
+
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+const lastName = (name: string) => name.split(" ").pop() ?? name;
+
+const peopleGroups = [
+  { key: "pi", label: "Principal Investigator" },
+  { key: "research_scientist", label: "Research Scientists" },
+  { key: "postdoc", label: "Postdocs" },
+  { key: "phd", label: "PhD Students" },
+  { key: "masters", label: "Master's Students" },
+  { key: "undergrad", label: "Undergraduate Students" },
+  // Alumni are intentionally not shown for now (per Eric) — entries with
+  // category "alumni" stay in the collection for a possible future page.
+]
+  .map((group) => ({
+    ...group,
+    members: people
+      .filter((person) => person.data.category === group.key)
+      .sort((a, b) => {
+        if (a.data.placeholder !== b.data.placeholder) {
+          return a.data.placeholder ? 1 : -1;
+        }
+        return lastName(a.data.name).localeCompare(lastName(b.data.name));
+      }),
+  }))
+  .filter((group) => group.members.length > 0);
+---
+
+<BaseLayout title="Home">
+  <section class="section hero" id="top">
+    <div class="container">
+      <div class="hero__content">
+        <p class="eyebrow">Stanford University</p>
+        <h1><span class="accent">DASH</span> Lab</h1>
+        <p class="hero-tagline" style="margin-top: 16px;">
+          Computational methods and machine learning for science &amp; engineering.
+        </p>
+        <p class="lede" style="margin-top: 20px; font-size: 1.05rem;">
+          The research group of <a href="https://profiles.stanford.edu/eric-darve" target="_blank" rel="noopener">Eric Darve</a>, Director of <a href="https://icme.stanford.edu" target="_blank" rel="noopener">ICME</a> and Professor of Mechanical Engineering at Stanford University.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="people">
+    <div class="container">
+      <p class="eyebrow">People</p>
+      <h2>Research Team</h2>
+
+      {
+        peopleGroups.map((group) => (
+          <div class="people-group" style="margin-top: 40px;">
+            <h3 class="people-group__heading">{group.label}</h3>
+            <div class="people-grid" style="margin-top: 16px;">
+              {group.members.map((person) =>
+                person.data.placeholder ? (
+                  <div class="person-card person-card--placeholder">
+                    <div class="person-meta">
+                      <div class="avatar avatar--placeholder">+</div>
+                      <div class="person-meta__text">
+                        <h3 class="row__title">{person.data.name}</h3>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <a
+                    href={`/member/${person.id}`}
+                    class={person.data.category === "pi" ? "person-card person-card--pi" : "person-card"}
+                    data-pills={person.data.pills?.join(",") ?? ""}
+                  >
+                    <div class="person-meta">
+                      {person.data.photo ? (
+                        <img src={person.data.photo} alt={person.data.name} class="avatar" />
+                      ) : (
+                        <div class="avatar avatar--initials">{initials(person.data.name)}</div>
+                      )}
+                      <div class="person-meta__text">
+                        <h3 class="row__title">{person.data.name}</h3>
+                      </div>
+                    </div>
+                    {person.data.category !== "alumni" && person.data.pills && person.data.pills.length > 0 && (
+                      <div class="pill-row pill-row--center" style="margin-top: 14px;">
+                        {person.data.pills.slice(0, 2).map((slug) => (
+                          <span class="tag" data-pill={slug}>{researchStreamLabel(slug)}</span>
+                        ))}
+                      </div>
+                    )}
+                  </a>
+                )
+              )}
+            </div>
+          </div>
+        ))
+      }
+
+    </div>
+  </section>
+
+  <section class="section" id="research">
+    <div class="container">
+      <p class="eyebrow">Research</p>
+      <h2 class="research-headline">Reliable AI For Science And Engineering</h2>
+      <p class="lede research-intro">
+        We develop machine-learning algorithms, numerical methods, and
+        high-performance implementations that make scientific and AI systems
+        faster, more reliable, and easier to understand.
+      </p>
+
+      <ul class="research-list">
+        {
+          researchAreas.map((area) => (
+            <li class="research-list__item">
+              <a href={`/research/${area.slug}`} class="row research-row">
+                <h3 class="row__title research-row__title">{area.title}</h3>
+                <div class="research-row__body">
+                  <p class="row__desc research-row__desc">{area.description}</p>
+                  <div class="pill-row research-row__pills">
+                    {area.pills.map((slug) => (
+                      <span class="tag">{researchStreamLabel(slug)}</span>
+                    ))}
+                  </div>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="news">
+    <div class="container">
+      <p class="eyebrow">News</p>
+      <h2>Lab updates</h2>
+
+      <div class="stack" style="margin-top: 32px;">
+        {
+          news.map((item) => (
+            <a class="row" href={item.data.url ?? "#news"} target="_blank" rel="noopener">
+              <div>
+                <span class="row__index">{item.data.date}</span>
+                <h3 class="row__title">{item.data.title}</h3>
+              </div>
+              <p class="row__desc">{item.data.summary}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const cards = document.querySelectorAll<HTMLElement>("#people .person-card");
+  const tags = document.querySelectorAll<HTMLElement>("#people .tag[data-pill]");
+  let activePill: string | null = null;
+
+  function applyFilter() {
+    cards.forEach((card) => {
+      const isPi = card.classList.contains("person-card--pi");
+      const pills = (card.dataset.pills ?? "").split(",").filter(Boolean);
+      const isMatch = activePill !== null && (isPi || pills.includes(activePill));
+      card.classList.toggle("person-card--match", isMatch);
+    });
+    tags.forEach((tag) => {
+      tag.classList.toggle("tag--active", tag.dataset.pill === activePill);
+    });
+  }
+
+  tags.forEach((tag) => {
+    tag.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const slug = tag.dataset.pill ?? null;
+      activePill = activePill === slug ? null : slug;
+      applyFilter();
+    });
+  });
+</script>

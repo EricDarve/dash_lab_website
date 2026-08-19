@@ -1,0 +1,75 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { researchStreamLabel } from "../../data/researchStreams";
+
+export async function getStaticPaths() {
+  const people = await getCollection("people");
+  return people
+    .filter(
+      (person) => !person.data.placeholder && person.data.category !== "alumni"
+    )
+    .map((person) => ({
+      params: { id: person.id },
+      props: { person },
+    }));
+}
+
+const { person } = Astro.props;
+const { Content } = await render(person);
+
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+---
+
+<BaseLayout title={person.data.name}>
+  <section class="section member-page" id="top">
+    <div class="container member-container">
+      <a href="/#people" class="back-link">&larr; DASH Lab</a>
+
+      <div class="member-header" style="margin-top: 28px;">
+        {person.data.photo ? (
+          <img src={person.data.photo} alt={person.data.name} class="avatar avatar--lg" />
+        ) : (
+          <div class="avatar avatar--lg avatar--initials">{initials(person.data.name)}</div>
+        )}
+        <div>
+          <h1 class="member-name">{person.data.name}</h1>
+          <p class="member-role">{person.data.role}</p>
+        </div>
+      </div>
+
+      {person.data.category !== "alumni" && person.data.pills && person.data.pills.length > 0 && (
+        <div class="pill-row" style="margin-top: 18px;">
+          {person.data.pills.map((slug) => (
+            <span class="tag">{researchStreamLabel(slug)}</span>
+          ))}
+        </div>
+      )}
+
+      <div class="person-bio member-bio" style="margin-top: 20px;">
+        <Content />
+      </div>
+
+      {person.data.links && (
+        <div class="person-links" style="margin-top: 20px;">
+          {person.data.links.website && (
+            <a href={person.data.links.website} target="_blank" rel="noopener">
+              Website
+            </a>
+          )}
+          {person.data.links.scholarUrl && (
+            <a href={person.data.links.scholarUrl} target="_blank" rel="noopener">
+              Google Scholar
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

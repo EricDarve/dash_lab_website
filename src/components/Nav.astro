@@ -1,0 +1,162 @@
+---
+const links = [
+  { href: "/#top", label: "Home" },
+  { href: "/#people", label: "People" },
+  { href: "/#research", label: "Research" },
+  { href: "/#news", label: "News" },
+];
+---
+
+<header class="nav">
+  <div class="container nav__inner">
+    <a href="/#top" class="nav__brand"><span class="accent">DASH</span> Lab</a>
+    <nav>
+      <ul class="nav__links">
+        {
+          links.map((link) => (
+            <li>
+              <a href={link.href} class="nav__link">
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    height: 76px;
+  }
+
+  .nav__brand {
+    flex-shrink: 0;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .nav__inner nav {
+    flex: 1;
+  }
+
+  .nav__links {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav__links li {
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav__link {
+    text-decoration: none;
+    font-size: 16px;
+    color: var(--ink-secondary);
+  }
+
+  .nav__link:hover {
+    color: var(--ink);
+  }
+
+  .nav__link--active {
+    color: var(--cardinal);
+    font-weight: 600;
+  }
+
+  @media (max-width: 640px) {
+    .nav__inner {
+      gap: 20px;
+    }
+  }
+</style>
+
+<script>
+  const navLinks = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>(".nav__link")
+  );
+  const linkByHash = new Map(
+    navLinks.map((link) => {
+      const href = link.getAttribute("href") ?? "";
+      const hash = href.includes("#") ? `#${href.split("#")[1]}` : href;
+      return [hash, link];
+    })
+  );
+  const sections = Array.from(document.querySelectorAll("section[id]"));
+  const visibleRatio = new Map<string, number>();
+
+  const updateActiveLink = () => {
+    let activeId: string | null = null;
+    let maxRatio = 0;
+    visibleRatio.forEach((ratio, id) => {
+      if (ratio > maxRatio) {
+        maxRatio = ratio;
+        activeId = id;
+      }
+    });
+    navLinks.forEach((link) => link.classList.remove("nav__link--active"));
+    if (activeId) {
+      linkByHash.get(`#${activeId}`)?.classList.add("nav__link--active");
+    }
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        visibleRatio.set(entry.target.id, entry.intersectionRatio);
+      });
+      updateActiveLink();
+    },
+    { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1] }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+
+  const hero = document.querySelector<HTMLElement>(".hero");
+  const heroContent = hero?.querySelector<HTMLElement>(".hero__content") ?? null;
+
+  if (hero && heroContent) {
+    let ticking = false;
+
+    const updateHeroFade = () => {
+      const heroHeight = hero.offsetHeight;
+      const progress = Math.min(Math.max(window.scrollY / (heroHeight * 0.5), 0), 1);
+      heroContent.style.opacity = String(1 - progress);
+      ticking = false;
+    };
+
+    updateHeroFade();
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(updateHeroFade);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+    window.addEventListener("resize", updateHeroFade);
+  }
+</script>

@@ -1,0 +1,85 @@
+# CURATED, VERIFIED-ONLY LIST — selected papers, 2023 onward.
+# Verified via DBLP (canonical author page: https://dblp.org/pid/33/6221.html,
+# tagged "Stanford University, ICME", ORCID 0000-0002-1938-3836 matches
+# Eric Darve's Stanford profile), cross-checked against arXiv/Semantic Scholar.
+# Where a paper had both an arXiv preprint and a later journal version, only
+# the published journal entry is listed to avoid double-counting.
+# TODO before launch: review selection with Eric, add anything missing since
+# this was compiled.
+
+- id: "causal-registers-scratchpad-2026"
+  title: "Do Models Read What They Write? Causal Registers in Scratchpad Reasoning"
+  authors: "Benjamin Shih, John Winnicki, Eric Darve"
+  venue: "arXiv preprint (2606.29522)"
+  year: 2026
+  sourceUrl: "https://dblp.org/pid/33/6221.html"
+
+- id: "lu-factorization-rank-deficient-2026"
+  title: "Necessary and Sufficient Conditions for the Existence of an LU Factorization for General Rank Deficient Matrices"
+  authors: "Eric Darve"
+  venue: "arXiv preprint (2601.07791)"
+  year: 2026
+  sourceUrl: "https://dblp.org/pid/33/6221.html"
+
+- id: "bifurcation-handling-vascular-2026"
+  title: "Data-driven bifurcation handling in physics-based reduced-order vascular hemodynamic models"
+  authors: "Natalia L. Rubio, Eric F. Darve, Alison L. Marsden"
+  venue: "Computer Methods and Programs in Biomedicine, 276:109230"
+  year: 2026
+  sourceUrl: "https://dblp.org/pid/33/6221.html"
+
+- id: "hybrid-modeling-bifurcation-pressure-2025"
+  title: "Hybrid physics-based and data-driven modeling of vascular bifurcation pressure differences"
+  authors: "Natalia L. Rubio, Luca Pegolotti, Martin R. Pfaller, Eric F. Darve, Alison L. Marsden"
+  venue: "Computers in Biology and Medicine, 184:109420"
+  year: 2025
+  sourceUrl: "https://dblp.org/pid/33/6221.html"
+
+- id: "transfer-learning-anomaly-rotating-2025"
+  title: "Transfer Learning for Anomaly Detection in Rotating Machinery Using Data-Driven Key Order Estimation"
+  authors: "Jia Liang, Huanyi Shui, Rajesh Gupta, Devesh Upadhyay, Eric Darve"
+  venue: "IEEE Transactions on Automation Science and Engineering, 22:13310-13326"
+  year: 2025
+  sourceUrl: "https://dblp.org/pid/33/6221.html"
+
+- id: "interpretable-representation-turbulence-2025"
+  title: "Physically Interpretable Representation and Controlled Generation for Turbulence Data"
+  authors: "Tiffany Fan, Murray Cutforth, Marta D'Elia, Alexandre Cortiella, Alireza Doostan, Eric Darve"
+  venue: "CAI 2025"
+  year: 2025
+  sourceUrl: "https://dblp.org/pid/33/6221.html"
+
+- id: "reduced-order-cardiovascular-gnn-2024"
+  title: "Learning reduced-order models for cardiovascular simulations with graph neural networks"
+  authors: "Luca Pegolotti, Martin R. Pfaller, Natalia L. Rubio, Ke Ding, Rita Brugarolas Brufau, Eric Darve, Alison L. Marsden"
+  venue: "Computers in Biology and Medicine, 168:107676"
+  year: 2024
+  sourceUrl: "https://dblp.org/pid/33/6221.html"
+
+- id: "coincident-learning-anomaly-2024"
+  title: "Coincident learning for unsupervised anomaly detection of scientific instruments"
+  authors: "Ryan Humble, Zhe Zhang, Finn H. O'Shea, Eric Darve, Daniel Ratner"
+  venue: "Machine Learning: Science and Technology, 5(3):035036"
+  year: 2024
+  sourceUrl: "https://dblp.org/pid/33/6221.html"
+
+- id: "s-step-gmres-2024"
+  title: "A Numerically Stable Communication-Avoiding s-Step GMRES Algorithm"
+  authors: "Zan Xu, Juan J. Alonso, Eric Darve"
+  venue: "SIAM Journal on Matrix Analysis and Applications, 45(4):2039-2074"
+  year: 2024
+  sourceUrl: "https://dblp.org/pid/33/6221.html"
+
+- id: "hykkt-2023"
+  title: "HyKKT: a hybrid direct-iterative method for solving KKT linear systems"
+  authors: "Shaked Regev, Naiyuan Chiang, Eric Darve, Cosmin G. Petra, Michael A. Saunders, Kasia Swirydowicz, Slaven Peles"
+  venue: "Optimization Methods and Software, 38:332-355"
+  year: 2023
+  sourceUrl: "https://dblp.org/pid/33/6221.html"
+
+- id: "anomaly-detection-domain-adaptation-2023"
+  title: "Anomaly Detection with Domain Adaptation"
+  authors: "Ziyi Yang, Iman Soltani, Eric Darve"
+  venue: "CVPR Workshops 2023, 2958-2967"
+  year: 2023
+  sourceUrl: "https://dblp.org/pid/33/6221.html"
