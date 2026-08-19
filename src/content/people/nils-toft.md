@@ -2,6 +2,7 @@
 name: Nils Astrup Toft
 role: PhD Student, ICME
 category: phd
+pills: [interpretability]
 photo: /people/nils-toft.jpg
 sourceUrl: https://icme.stanford.edu/news/meet-our-incoming-phd-students-autumn-2025
 placeholder: false
