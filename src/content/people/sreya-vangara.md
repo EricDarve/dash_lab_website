@@ -11,7 +11,8 @@ sourceUrl: https://sreyavangara.com/
 placeholder: false
 ---
 
-AI systems connecting experiments, literature, and decision-making for
-energy materials — spanning battery diagnostics and critical-materials
-discovery.
-<!-- Source: https://sreyavangara.com/ -->
+I am a Stanford Mechanical Engineering PhD Candidate and AI-for-science
+researcher at the SLAC–Stanford Battery Center, building
+evidence-grounded systems for battery diagnostics, critical-materials
+discovery, climate-resilient infrastructure, and technology policy.
+<!-- Bio provided via Kirill, 2026-08-20. -->
