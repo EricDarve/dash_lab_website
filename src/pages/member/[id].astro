@@ -43,7 +43,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
         )}
         <div>
           <h1 class="member-name">{person.data.name}</h1>
-          <p class="member-role">{person.data.role}</p>
+          {person.data.category !== "phd" && (
+            <p class="member-role">{person.data.role}</p>
+          )}
         </div>
       </div>
 
