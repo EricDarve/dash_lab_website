@@ -30,15 +30,16 @@ const { href } = Astro.props;
     color: var(--cardinal);
   }
 
-  @media (min-width: 1240px) and (hover: hover) {
+  @media (min-width: 960px) and (hover: hover) {
     .back-rail {
       position: fixed;
       top: 0;
       left: 0;
       bottom: 0;
-      /* Fill the whole gutter between the screen edge and the
-         centered content container. */
-      width: calc(50% - var(--container) / 2);
+      /* Fill everything from the screen edge to just before the
+         centered 640px text column (.member-container), minus a
+         16px breathing gap. */
+      width: calc(50% - 336px);
       display: flex;
       align-items: center;
       justify-content: center;
