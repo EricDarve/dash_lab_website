@@ -6,7 +6,6 @@ pills: [uncertainty-anomaly-detection, ml-science-engineering]
 photo: /people/apoorv-srivastava.jpg
 links:
   website: https://apoorv-s.github.io/
-  scholarUrl: https://scholar.google.com/citations?user=0hLHVHEAAAAJ
 sourceUrl: https://apoorv-s.github.io/
 placeholder: false
 ---

@@ -6,7 +6,6 @@ pills: [ai-for-science]
 photo: /people/sreya-vangara.png
 links:
   website: https://sreyavangara.com/
-  scholarUrl: https://scholar.google.com/citations?hl=en&user=1CmXx34AAAAJ
 sourceUrl: https://sreyavangara.com/
 placeholder: false
 ---
