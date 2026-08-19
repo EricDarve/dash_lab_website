@@ -89,6 +89,12 @@ a {
   margin: 0 0 12px;
 }
 
+/* The hero's "Stanford University" reads slightly larger than the
+   section eyebrows. */
+.hero .eyebrow {
+  font-size: 17px;
+}
+
 h1,
 h2,
 h3 {
