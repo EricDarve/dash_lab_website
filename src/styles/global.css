@@ -136,6 +136,11 @@ p {
   color: var(--cardinal);
 }
 
+/* Even out the intro's line lengths so titles don't break mid-phrase. */
+.hero-intro {
+  text-wrap: balance;
+}
+
 .hero-tagline {
   font-size: clamp(1.4rem, 2.8vw, 1.875rem);
   font-weight: 500;
