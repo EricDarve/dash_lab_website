@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import BackPill from "../../components/BackPill.astro";
 import { researchAreas } from "../../data/researchAreas";
 import { researchStreamLabel } from "../../data/researchStreams";
 
@@ -40,7 +41,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 <BaseLayout title={area.title} description={area.description}>
   <section class="section member-page" id="top">
     <div class="container member-container">
-      <a href={`${base}/#research`} class="back-link">&larr; DASH Lab</a>
+      <BackPill href={`${base}/#research`} />
 
       <div style="margin-top: 28px;">
         <div class="pill-row">

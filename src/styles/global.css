@@ -567,17 +567,6 @@ a.row:hover .row__title {
   gap: 16px;
 }
 
-.back-link {
-  display: inline-block;
-  font-size: 14px;
-  color: var(--ink-secondary);
-  text-decoration: none;
-}
-
-.back-link:hover {
-  color: var(--cardinal);
-}
-
 .member-page {
   min-height: 0;
   align-items: flex-start;
