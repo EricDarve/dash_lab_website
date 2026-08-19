@@ -142,9 +142,22 @@ p {
   color: var(--cardinal);
 }
 
-/* Even out the intro's line lengths so titles don't break mid-phrase. */
+/* Two deliberate lines: Director title, then professorships (the
+   hero-intro__break <br>). On narrower viewports the long first line
+   can't fit, so drop the forced break and balance natural wrapping. */
 .hero-intro {
-  text-wrap: balance;
+  max-width: none;
+}
+
+@media (max-width: 1099px) {
+  .hero-intro {
+    max-width: 640px;
+    text-wrap: balance;
+  }
+
+  .hero-intro__break {
+    display: none;
+  }
 }
 
 .hero-tagline {
