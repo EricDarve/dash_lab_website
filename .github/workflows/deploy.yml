@@ -22,6 +22,11 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    # TODO: remove continue-on-error once Eric enables GitHub Pages
+    # (Settings -> Pages -> Source: GitHub Actions). Until then every
+    # deploy fails with "Ensure GitHub Pages has been enabled", and this
+    # keeps those expected failures from spamming run-failed emails.
+    continue-on-error: true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
