@@ -239,11 +239,10 @@ p {
   padding-bottom: 72px;
 }
 
-/* Long headline, so balance the line break rather than leaving an orphan.
+/* One line on desktop; wraps naturally only when the viewport forces it.
    Size stays on the global h2 scale to match People and News. */
 .research-headline {
   text-wrap: balance;
-  max-width: 20ch;
 }
 
 .research-intro {
