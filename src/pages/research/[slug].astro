@@ -14,6 +14,9 @@ export async function getStaticPaths() {
 const { area } = Astro.props;
 
 const people = await getCollection("people");
+
+const lastName = (name: string) => name.split(" ").pop() ?? name;
+
 const relatedPeople = people
   .filter(
     (person) =>
@@ -21,7 +24,7 @@ const relatedPeople = people
       person.data.category !== "alumni" &&
       person.data.pills?.some((slug) => area.pills.includes(slug))
   )
-  .sort((a, b) => a.data.name.localeCompare(b.data.name));
+  .sort((a, b) => lastName(a.data.name).localeCompare(lastName(b.data.name)));
 
 const initials = (name: string) =>
   name
