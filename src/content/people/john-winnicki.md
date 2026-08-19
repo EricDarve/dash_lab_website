@@ -11,6 +11,8 @@ sourceUrl: https://www.johnwinnicki.com/
 placeholder: false
 ---
 
-Mechanistic interpretability and AI for science, focused on high-dimensional
-scientific data.
-<!-- Source: https://www.johnwinnicki.com/ -->
+I'm a Ph.D. candidate in Computational and Mathematical Engineering
+(ICME) at Stanford. I work at the intersection of mechanistic
+interpretability and AI for science, with a focus on unsupervised
+methods for scientific data.
+<!-- Bio provided via Kirill, 2026-08-20. -->
