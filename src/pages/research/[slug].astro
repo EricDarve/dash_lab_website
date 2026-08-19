@@ -39,7 +39,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <BaseLayout title={area.title} description={area.description}>
-  <section class="section member-page" id="top">
+  <section class="section member-page">
     <div class="container member-container">
       <BackPill href={`${base}/#research`} />
 
@@ -60,10 +60,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
           <p class="eyebrow">People in this area</p>
           <div class="people-grid" style="margin-top: 16px;">
             {relatedPeople.map((person) => (
-              <a href={`${base}/member/${person.id}`} class="person-card">
+              <a href={`${base}/member/${person.id}/`} class="person-card">
                 <div class="person-meta">
                   {person.data.photo ? (
-                    <img src={`${base}${person.data.photo}`} alt={person.data.name} class="avatar" />
+                    <img src={`${base}${person.data.photo}`} alt={person.data.name} class="avatar" width="84" height="84" loading="lazy" decoding="async" />
                   ) : (
                     <div class="avatar avatar--initials">{initials(person.data.name)}</div>
                   )}

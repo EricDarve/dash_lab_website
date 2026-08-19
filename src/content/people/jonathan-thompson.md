@@ -3,7 +3,7 @@ name: Jonathan Thompson
 role: PhD Student, ICME
 category: phd
 pills: [ml-science-engineering]
-photo: /people/jonathan-thompson.jpg
+photo: /people/jonathan-thompson.webp
 sourceUrl: https://www.siam.org/publications/siam-news/authors/jonathan-thompson/
 placeholder: false
 ---

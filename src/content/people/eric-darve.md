@@ -2,7 +2,7 @@
 name: Eric Darve
 role: Principal Investigator · Director, ICME · Professor of Mechanical Engineering
 category: pi
-photo: /people/eric-darve.jpg
+photo: /people/eric-darve.webp
 links:
   website: https://profiles.stanford.edu/eric-darve
 sourceUrl: https://profiles.stanford.edu/eric-darve

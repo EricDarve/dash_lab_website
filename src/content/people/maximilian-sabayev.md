@@ -3,7 +3,7 @@ name: Maximilian Sabayev
 role: PhD Student, ICME
 category: phd
 pills: [ai-for-science]
-photo: /people/maximilian-sabayev.jpg
+photo: /people/maximilian-sabayev.webp
 links:
   website: https://www.linkedin.com/in/maximilian-sabayev-60b91a15a/
 sourceUrl: https://icme.stanford.edu/research-impact/student-research/project-based-research-courses

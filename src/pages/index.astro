@@ -84,13 +84,13 @@ const peopleGroups = [
                   </div>
                 ) : (
                   <a
-                    href={`${base}/member/${person.id}`}
+                    href={`${base}/member/${person.id}/`}
                     class={person.data.category === "pi" ? "person-card person-card--pi" : "person-card"}
                     data-pills={person.data.pills?.join(",") ?? ""}
                   >
                     <div class="person-meta">
                       {person.data.photo ? (
-                        <img src={`${base}${person.data.photo}`} alt={person.data.name} class="avatar" />
+                        <img src={`${base}${person.data.photo}`} alt={person.data.name} class="avatar" width="84" height="84" loading="lazy" decoding="async" />
                       ) : (
                         <div class="avatar avatar--initials">{initials(person.data.name)}</div>
                       )}
@@ -130,7 +130,7 @@ const peopleGroups = [
         {
           researchAreas.map((area) => (
             <li class="research-list__item">
-              <a href={`${base}/research/${area.slug}`} class="row research-row">
+              <a href={`${base}/research/${area.slug}/`} class="row research-row">
                 <h3 class="row__title research-row__title">{area.title}</h3>
                 <div class="research-row__body">
                   <p class="row__desc research-row__desc">{area.description}</p>

@@ -3,7 +3,7 @@ name: Junlin Luo
 role: PhD Student, Mechanical Engineering
 category: phd
 pills: [agentic-ai, ai-for-science]
-photo: /people/junlin-luo.jpg
+photo: /people/junlin-luo.webp
 links:
   website: https://profiles.stanford.edu/junlin-luo
 sourceUrl: https://profiles.stanford.edu/junlin-luo

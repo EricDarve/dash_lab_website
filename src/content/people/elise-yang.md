@@ -3,7 +3,7 @@ name: Elise Yang
 role: PhD Student, Mechanical Engineering
 category: phd
 pills: [computational-imaging]
-photo: /people/elise-yang.jpg
+photo: /people/elise-yang.webp
 links:
   website: https://eliseyang.me/
 sourceUrl: https://eliseyang.me/

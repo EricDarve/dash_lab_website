@@ -3,7 +3,7 @@ name: Kirill Acharya
 role: PhD Student
 category: phd
 pills: [interpretability, ai-safety]
-photo: /people/kirill-acharya.jpg
+photo: /people/kirill-acharya.webp
 links:
   website: https://kirillacharya.com
 sourceUrl: https://kirillacharya.com

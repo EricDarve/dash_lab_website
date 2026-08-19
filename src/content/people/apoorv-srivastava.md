@@ -3,7 +3,7 @@ name: Apoorv Srivastava
 role: PhD Candidate, Mechanical Engineering
 category: phd
 pills: [uncertainty-anomaly-detection, ml-science-engineering]
-photo: /people/apoorv-srivastava.jpg
+photo: /people/apoorv-srivastava.webp
 links:
   website: https://apoorv-s.github.io/
 sourceUrl: https://apoorv-s.github.io/

@@ -3,7 +3,7 @@ name: Nicholas Hausman
 role: PhD Student, Chemistry
 category: phd
 pills: [ml-science-engineering, uncertainty-anomaly-detection]
-photo: /people/nicholas-hausman.jpg
+photo: /people/nicholas-hausman.webp
 links:
   website: https://chemistry.stanford.edu/people/nicholas-hausman
 sourceUrl: https://chemistry.stanford.edu/people/nicholas-hausman

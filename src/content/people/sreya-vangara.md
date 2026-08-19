@@ -3,7 +3,7 @@ name: Sreya Vangara
 role: PhD Candidate, Mechanical Engineering
 category: phd
 pills: [ai-for-science, agentic-ai]
-photo: /people/sreya-vangara.png
+photo: /people/sreya-vangara.webp
 links:
   website: https://sreyavangara.com/
 sourceUrl: https://sreyavangara.com/

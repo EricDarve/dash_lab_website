@@ -3,7 +3,7 @@ name: Abeynaya Gnanasekaran
 role: PhD, Institute for Computational and Mathematical Engineering
 category: alumni
 pills: [numerical-methods-hpc]
-photo: /people/abeynaya-gnanasekaran.jpg
+photo: /people/abeynaya-gnanasekaran.webp
 links:
   website: https://stanford.edu/~abeynaya/
 sourceUrl: https://stanford.edu/~abeynaya/

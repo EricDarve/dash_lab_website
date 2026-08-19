@@ -31,13 +31,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <BaseLayout title={person.data.name}>
-  <section class="section member-page" id="top">
+  <section class="section member-page">
     <div class="container member-container">
       <BackPill href={`${base}/#people`} />
 
       <div class="member-header" style="margin-top: 28px;">
         {person.data.photo ? (
-          <img src={`${base}${person.data.photo}`} alt={person.data.name} class="avatar avatar--lg" />
+          <img src={`${base}${person.data.photo}`} alt={person.data.name} class="avatar avatar--lg" width="96" height="96" decoding="async" />
         ) : (
           <div class="avatar avatar--lg avatar--initials">{initials(person.data.name)}</div>
         )}

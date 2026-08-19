@@ -3,7 +3,7 @@ name: John Winnicki
 role: PhD Candidate, ICME
 category: phd
 pills: [interpretability, ai-for-science]
-photo: /people/john-winnicki.jpg
+photo: /people/john-winnicki.webp
 links:
   website: https://www.johnwinnicki.com/
 sourceUrl: https://www.johnwinnicki.com/

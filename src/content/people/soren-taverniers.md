@@ -3,7 +3,7 @@ name: Søren Taverniers
 role: Research Scientist, Mechanical Engineering
 category: research_scientist
 pills: [ai-for-science, agentic-ai, uncertainty-anomaly-detection]
-photo: /people/soren-taverniers.png
+photo: /people/soren-taverniers.webp
 links:
   website: https://chameleon20.github.io/
 sourceUrl: https://chameleon20.github.io/

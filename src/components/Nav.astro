@@ -34,8 +34,10 @@ const links = [
     top: 0;
     z-index: 50;
     background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: saturate(180%) blur(14px);
+    /* -webkit- first: the minifier keeps only the last duplicate, and
+       Firefox needs the unprefixed form. */
     -webkit-backdrop-filter: saturate(180%) blur(14px);
+    backdrop-filter: saturate(180%) blur(14px);
     border-bottom: 1px solid var(--border);
   }
 
@@ -108,6 +110,8 @@ const links = [
   const sections = Array.from(document.querySelectorAll("section[id]"));
   const visibleRatio = new Map<string, number>();
 
+  let lastActiveId: string | null = null;
+
   const updateActiveLink = () => {
     let activeId: string | null = null;
     let maxRatio = 0;
@@ -117,6 +121,8 @@ const links = [
         activeId = id;
       }
     });
+    if (activeId === lastActiveId) return;
+    lastActiveId = activeId;
     navLinks.forEach((link) => link.classList.remove("nav__link--active"));
     if (activeId) {
       linkByHash.get(`#${activeId}`)?.classList.add("nav__link--active");
@@ -140,9 +146,11 @@ const links = [
 
   if (hero && heroContent) {
     let ticking = false;
+    // Cache the height: reading offsetHeight in the scroll path forces
+    // a layout; it only changes on resize.
+    let heroHeight = hero.offsetHeight;
 
     const updateHeroFade = () => {
-      const heroHeight = hero.offsetHeight;
       const progress = Math.min(Math.max(window.scrollY / (heroHeight * 0.5), 0), 1);
       heroContent.style.opacity = String(1 - progress);
       ticking = false;
@@ -159,6 +167,9 @@ const links = [
       },
       { passive: true }
     );
-    window.addEventListener("resize", updateHeroFade);
+    window.addEventListener("resize", () => {
+      heroHeight = hero.offsetHeight;
+      updateHeroFade();
+    });
   }
 </script>
