@@ -1,107 +1,29 @@
 ---
-// Back-to-home pill: idle shows a chevron + the D mark; on hover it
-// stretches open, the "DASH Lab" label slides in, and the pill fills
-// cardinal. Touch devices (no hover) always get the expanded form.
+// Simple back-to-home pill: static "‹ DASH Lab", subtle hover.
 interface Props {
   href: string;
 }
 const { href } = Astro.props;
 ---
 
-<a href={href} class="back-pill" aria-label="Back to DASH Lab">
-  <span class="back-pill__chevron" aria-hidden="true">&lsaquo;</span>
-  <svg class="back-pill__mark" viewBox="0 0 128 128" aria-hidden="true">
-    <rect width="128" height="128" rx="28" class="back-pill__mark-bg"></rect>
-    <path
-      fill="#ffffff"
-      fill-rule="evenodd"
-      d="M34 30 H60 A34 34 0 0 1 60 98 H34 Z M48 44 H60 A20 20 0 0 1 60 84 H48 Z"
-    ></path>
-  </svg>
-  <span class="back-pill__label">DASH Lab</span>
-</a>
+<a href={href} class="back-pill">&lsaquo;&nbsp; DASH Lab</a>
 
 <style>
   .back-pill {
-    display: inline-flex;
-    align-items: center;
+    display: inline-block;
     padding: 7px 14px;
     background: var(--paper-alt);
     border: 1px solid var(--border);
     border-radius: 999px;
     color: var(--ink-secondary);
     font-size: 14px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-weight: 500;
     text-decoration: none;
-    transition:
-      background 0.2s ease,
-      border-color 0.2s ease,
-      color 0.2s ease;
+    transition: color 0.15s ease, border-color 0.15s ease;
   }
 
-  .back-pill__chevron {
-    font-size: 19px;
-    line-height: 1;
-    margin-right: 8px;
-    transform: translateY(-1px);
-    transition: transform 0.2s ease;
-  }
-
-  .back-pill__mark {
-    display: block;
-    width: 19px;
-    height: 19px;
-  }
-
-  .back-pill__mark-bg {
-    fill: var(--cardinal);
-    transition: fill 0.2s ease;
-  }
-
-  .back-pill__label {
-    max-width: 0;
-    margin-left: 0;
-    opacity: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    transition:
-      max-width 0.25s ease,
-      margin-left 0.25s ease,
-      opacity 0.2s ease;
-  }
-
-  .back-pill:hover,
-  .back-pill:focus-visible {
-    background: var(--cardinal);
+  .back-pill:hover {
+    color: var(--cardinal);
     border-color: var(--cardinal);
-    color: #ffffff;
-  }
-
-  .back-pill:hover .back-pill__chevron,
-  .back-pill:focus-visible .back-pill__chevron {
-    transform: translate(-2px, -1px);
-  }
-
-  /* The mark's square melts into the cardinal pill, leaving the white D. */
-  .back-pill:hover .back-pill__mark-bg,
-  .back-pill:focus-visible .back-pill__mark-bg {
-    fill: transparent;
-  }
-
-  .back-pill:hover .back-pill__label,
-  .back-pill:focus-visible .back-pill__label {
-    max-width: 90px;
-    margin-left: 8px;
-    opacity: 1;
-  }
-
-  /* No hover on touch screens: always show the expanded label. */
-  @media (hover: none) {
-    .back-pill__label {
-      max-width: none;
-      margin-left: 8px;
-      opacity: 1;
-    }
   }
 </style>
