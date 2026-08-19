@@ -1,15 +1,17 @@
 ---
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
 const links = [
-  { href: "/#top", label: "Home" },
-  { href: "/#people", label: "People" },
-  { href: "/#research", label: "Research" },
-  { href: "/#news", label: "News" },
+  { href: `${base}/#top`, label: "Home" },
+  { href: `${base}/#people`, label: "People" },
+  { href: `${base}/#research`, label: "Research" },
+  { href: `${base}/#news`, label: "News" },
 ];
 ---
 
 <header class="nav">
   <div class="container nav__inner">
-    <a href="/#top" class="nav__brand"><span class="accent">DASH</span> Lab</a>
+    <a href={`${base}/#top`} class="nav__brand"><span class="accent">DASH</span> Lab</a>
     <nav>
       <ul class="nav__links">
         {

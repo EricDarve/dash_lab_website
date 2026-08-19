@@ -25,16 +25,18 @@ const initials = (name: string) =>
     .join("")
     .slice(0, 2)
     .toUpperCase();
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <BaseLayout title={person.data.name}>
   <section class="section member-page" id="top">
     <div class="container member-container">
-      <a href="/#people" class="back-link">&larr; DASH Lab</a>
+      <a href={`${base}/#people`} class="back-link">&larr; DASH Lab</a>
 
       <div class="member-header" style="margin-top: 28px;">
         {person.data.photo ? (
-          <img src={person.data.photo} alt={person.data.name} class="avatar avatar--lg" />
+          <img src={`${base}${person.data.photo}`} alt={person.data.name} class="avatar avatar--lg" />
         ) : (
           <div class="avatar avatar--lg avatar--initials">{initials(person.data.name)}</div>
         )}
