@@ -11,7 +11,13 @@ sourceUrl: https://apoorv-s.github.io/
 placeholder: false
 ---
 
-Inverse problems, data assimilation, and uncertainty quantification in
-highly nonlinear dynamical systems. Co-advised by Eric Darve and Daniel
-Tartakovsky.
-<!-- Source: https://apoorv-s.github.io/ -->
+I am a final year Ph.D. candidate in Mechanical Engineering at Stanford
+University, advised by Prof. Daniel Tartakovsky and Prof. Eric Darve. My
+research focuses on inverse problems, data assimilation (DA),
+uncertainty quantification (UQ), and probabilistic estimation in highly
+nonlinear dynamical systems. I develop optimization and machine learning
+methods for state estimation, forecasting, and sequential
+decision-making under uncertainty, with current work centered on deep
+probabilistic models for particle filtering and the assimilation of
+sparse and binary observations.
+<!-- Bio provided via Kirill, 2026-08-20. -->
