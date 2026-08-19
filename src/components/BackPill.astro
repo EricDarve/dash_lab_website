@@ -36,7 +36,9 @@ const { href } = Astro.props;
       top: 0;
       left: 0;
       bottom: 0;
-      width: 56px;
+      /* Fill the whole gutter between the screen edge and the
+         centered content container. */
+      width: calc(50% - var(--container) / 2);
       display: flex;
       align-items: center;
       justify-content: center;
