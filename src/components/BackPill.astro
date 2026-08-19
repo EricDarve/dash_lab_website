@@ -1,29 +1,63 @@
 ---
-// Simple back-to-home pill: static "‹ DASH Lab", subtle hover.
+// Back-to-home control. On large pointer screens: a full-height strip
+// on the left edge of the viewport — hovering tints it light grey,
+// clicking anywhere on it goes back. On small/touch screens it falls
+// back to the original inline "← DASH Lab" text link.
 interface Props {
   href: string;
 }
 const { href } = Astro.props;
 ---
 
-<a href={href} class="back-pill">&lsaquo;&nbsp; DASH Lab</a>
+<a href={href} class="back-rail" aria-label="Back to DASH Lab">
+  <span class="back-rail__arrow" aria-hidden="true">&larr;</span>
+</a>
+<a href={href} class="back-link">&larr; DASH Lab</a>
 
 <style>
-  .back-pill {
-    display: inline-block;
-    padding: 7px 14px;
-    background: var(--paper-alt);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    color: var(--ink-secondary);
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: color 0.15s ease, border-color 0.15s ease;
+  .back-rail {
+    display: none;
   }
 
-  .back-pill:hover {
+  .back-link {
+    display: inline-block;
+    font-size: 14px;
+    color: var(--ink-secondary);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
     color: var(--cardinal);
-    border-color: var(--cardinal);
+  }
+
+  @media (min-width: 1240px) and (hover: hover) {
+    .back-rail {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-secondary);
+      text-decoration: none;
+      z-index: 40;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .back-rail:hover {
+      background: rgba(29, 29, 31, 0.06);
+      color: var(--ink);
+    }
+
+    .back-rail__arrow {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .back-link {
+      display: none;
+    }
   }
 </style>
