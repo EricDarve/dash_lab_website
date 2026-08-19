@@ -42,7 +42,8 @@ const { href } = Astro.props;
       width: calc(50% - 336px);
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
+      padding-left: 28px;
       color: var(--ink-secondary);
       text-decoration: none;
       z-index: 40;
@@ -50,7 +51,7 @@ const { href } = Astro.props;
     }
 
     .back-rail:hover {
-      background: rgba(29, 29, 31, 0.06);
+      background: rgba(29, 29, 31, 0.025);
       color: var(--ink);
     }
 
