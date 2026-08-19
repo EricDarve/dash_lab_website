@@ -2,7 +2,7 @@
 name: Noémie Claret
 role: PhD Student, ICME
 category: phd
-pills: [ml-science-engineering]
+pills: [ml-science-engineering, interpretability]
 photo: /people/noemie-claret.jpg
 links:
   website: https://www.linkedin.com/in/noemie-claret/
