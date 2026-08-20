@@ -2,11 +2,14 @@
 import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
-// Deployed to GitHub Pages at https://ericdarve.github.io/dash_lab_website/.
-// If the site moves to a custom domain, update `site` and drop `base`.
+// Deploy targets (see README "Deployment"):
+// - GitHub Pages (default): https://ericdarve.github.io/dash_lab_website/
+// - Stanford web hosting: override per target, e.g.
+//   SITE=https://web.stanford.edu BASE=/group/dashlab npm run build
+//   then copy dist/ into the group's AFS WWW directory.
 export default defineConfig({
-  site: "https://ericdarve.github.io",
-  base: "/dash_lab_website",
+  site: process.env.SITE ?? "https://ericdarve.github.io",
+  base: process.env.BASE ?? "/dash_lab_website",
   // GitHub Pages 301-redirects /foo to /foo/, so emit and require
   // trailing slashes to skip that round trip on every navigation.
   trailingSlash: "always",
