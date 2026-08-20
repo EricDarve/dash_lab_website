@@ -5,6 +5,7 @@ category: pi
 photo: /people/eric-darve.webp
 links:
   website: https://profiles.stanford.edu/eric-darve
+  scholarUrl: https://scholar.google.com/citations?user=p_Ua-sIAAAAJ
 sourceUrl: https://profiles.stanford.edu/eric-darve
 placeholder: false
 ---
