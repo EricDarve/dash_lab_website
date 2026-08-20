@@ -1,4 +1,5 @@
 - [ ] Frontmatter includes `name`, `role`, `category`, and 1-3 `pills` from `src/data/researchStreams.ts`
 - [ ] Bio is 2-4 sentences, written by the person themselves
+- [ ] Photo (if added) is a 288×288 WebP in `public/people/` (see CONTRIBUTING.md)
 - [ ] Any factual claim (award, grant, publication) has a source
 - [ ] `npm run build` passes locally

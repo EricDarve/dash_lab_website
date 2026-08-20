@@ -3,6 +3,11 @@
 Everyone maintains their own entry. There's no central content owner beyond
 review — if your research focus or bio changes, you open the PR to update it.
 
+**How changes land:** students and lab members open pull requests, which the
+maintainer reviews and merges. Maintainers with push access (Eric, Kirill)
+can commit to `main` directly. Every push to `main` auto-deploys the site
+via GitHub Pages — there is no separate publish step.
+
 ## Add yourself to the People page
 
 1. Create `src/content/people/first-last.md`.
@@ -11,13 +16,12 @@ review — if your research focus or bio changes, you open the PR to update it.
    ```yaml
    ---
    name: Jane Doe
-   role: PhD Student, Mechanical Engineering
+   role: PhD Student, Mechanical Engineering # grouping label; not shown on PhD pages
    category: phd # pi | research_scientist | postdoc | phd | masters | undergrad | alumni
    pills: [ai-for-science, interpretability] # 1-3, from src/data/researchStreams.ts
-   photo: /people/jane-doe.jpg # optional — place the image in public/people/
+   photo: /people/jane-doe.webp # optional — see "Photos" below
    links:
      website: https://example.com # optional
-     scholarUrl: https://scholar.google.com/... # optional
    ---
    ```
 
@@ -25,6 +29,21 @@ review — if your research focus or bio changes, you open the PR to update it.
 4. Open a pull request. A GitHub Action builds the site automatically — if it
    fails, a required field is missing or a pill isn't in the allowed list.
 5. The maintainer reviews and merges.
+
+## Photos
+
+Photos live in `public/people/` as **288×288 WebP** (the avatars render at
+84–96 px, so 288 covers 3× retina). Convert whatever you have with
+ImageMagick — this also fixes phone photos that rely on an EXIF rotation
+flag:
+
+```sh
+magick your-photo.jpg -auto-orient -resize 288x288^ -gravity center \
+  -extent 288x288 -quality 80 public/people/first-last.webp
+```
+
+Use a roughly square, front-facing crop — the site displays photos in a
+circle, center-cropped.
 
 ## Choosing pills
 
