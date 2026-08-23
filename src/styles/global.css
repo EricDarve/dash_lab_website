@@ -380,6 +380,13 @@ a.row:hover .row__title {
   gap: 36px 28px;
 }
 
+/* Mobile: center the people cards instead of hugging the left edge. */
+@media (max-width: 700px) {
+  .people-grid {
+    justify-content: center;
+  }
+}
+
 .person-card {
   display: block;
   width: 168px;
