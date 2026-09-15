@@ -5,17 +5,12 @@ Eric Darve's research group at Stanford University. Built with
 [Astro](https://astro.build) — the build output is plain HTML/CSS with no
 server-side runtime, so it can be hosted anywhere static files are served.
 
-## Editing content
+## Contributing
 
-- **Your own entry** (students): see [CONTRIBUTING.md](CONTRIBUTING.md) —
-  edit `src/content/people/your-name.md`, open a pull request, Kirill
-  reviews and merges.
-- **Publications and news**: `src/data/publications.yaml` and
-  `src/data/news.yaml`.
-- **Research areas and pills**: `src/data/researchAreas.ts` and
-  `src/data/researchStreams.ts`.
-
-Anything pushed to `main` deploys automatically (see below).
+Current lab members can propose website updates through pull requests. See
+[CONTRIBUTING.md](CONTRIBUTING.md) for the step-by-step instructions.
+Nothing goes live until a maintainer reviews and merges; anything pushed to
+`main` then deploys automatically (see "Deployment").
 
 ## Commands
 
