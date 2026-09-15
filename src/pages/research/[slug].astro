@@ -2,11 +2,17 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BackPill from "../../components/BackPill.astro";
-import { researchAreas } from "../../data/researchAreas";
+import {
+  researchAreas,
+  legacyResearchAreas,
+  sectionParagraphs,
+} from "../../data/researchAreas";
 import { researchStreamLabel } from "../../data/researchStreams";
 
 export async function getStaticPaths() {
-  return researchAreas.map((area) => ({
+  // Legacy areas keep their /research/<slug> pages (old links still work)
+  // even though the homepage no longer lists them.
+  return [...researchAreas, ...legacyResearchAreas].map((area) => ({
     params: { slug: area.slug },
     props: { area },
   }));
@@ -36,29 +42,51 @@ const initials = (name: string) =>
     .toUpperCase();
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+// The outer page frame is the site-wide .container (--container in
+// global.css); BackPill's desktop rail needs the number so it stops short
+// of it. Inside, .research-frame (--research-frame) bounds the content.
+const FRAME_WIDTH = 1120;
 ---
 
+<!-- Layout: the shared .research-detail rules in src/styles/global.css. -->
 <BaseLayout title={area.title} description={area.description}>
-  <section class="section member-page">
-    <div class="container member-container">
-      <BackPill href={`${base}/#research`} />
+  <section class="section research-detail">
+    <div class="container">
+      <BackPill href={`${base}/#research`} column={FRAME_WIDTH} />
 
-      <h1 class="research-title" style="margin-top: 28px;">{area.title}</h1>
+      <div class="research-frame">
+      <h1 class="research-detail__title">{area.title}</h1>
 
-      <p class="lede" style="margin-top: 16px; font-size: 1.05rem; max-width: 560px;">
-        {area.description}
-      </p>
+      {area.sections.map((section) => (
+        <div class="research-detail__section">
+          {section.heading && (
+            <h2 class="research-detail__subheading">{section.heading}</h2>
+          )}
+          {sectionParagraphs(section).map((segments) => (
+            <p class="research-detail__prose">
+              {segments.map((segment) =>
+                segment.url ? (
+                  <a href={segment.url} target="_blank" rel="noopener">{segment.text}</a>
+                ) : (
+                  segment.text
+                )
+              )}
+            </p>
+          ))}
+        </div>
+      ))}
 
-      <div class="pill-row" style="margin-top: 18px;">
+      <div class="pill-row research-detail__tags">
         {area.pills.map((slug) => (
           <span class="tag">{researchStreamLabel(slug)}</span>
         ))}
       </div>
 
       {relatedPeople.length > 0 && (
-        <div style="margin-top: 48px;">
+        <div class="research-detail__people">
           <p class="eyebrow">People in this area</p>
-          <div class="people-grid" style="margin-top: 16px;">
+          <div class="research-detail__grid">
             {relatedPeople.map((person) => (
               <a href={`${base}/member/${person.id}/`} class="person-card">
                 <div class="person-meta">
@@ -76,15 +104,23 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
           </div>
         </div>
       )}
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .research-title {
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+  /* BackPill's hover rail only has room beside the 1120px frame on wide
+     screens; narrower desktops use the inline "← DASH Lab" link instead.
+     (Kept here, not in global.css, because it must out-rank BackPill's own
+     scoped rules.) */
+  @media (max-width: 1279px) {
+    .research-detail :global(.back-rail) {
+      display: none;
+    }
+
+    .research-detail :global(.back-link) {
+      display: inline-block;
+    }
   }
 </style>

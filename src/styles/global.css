@@ -8,6 +8,7 @@
   --ink: #1d1d1f;
   --ink-soft: #3c3c41;
   --ink-secondary: #6e6e73;
+  --ink-muted: #55555a; /* between soft and secondary: readable but still subordinate */
   --paper: #ffffff;
   --paper-alt: #f5f5f7;
   --border: #d2d2d7;
@@ -16,6 +17,11 @@
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
   --container: 1120px;
+  /* Shared frame for everything Research (overview intro + rows, detail
+     title/prose/tags/people): the .container's 1072px content box trimmed
+     to 960px so long-form prose stays readable. Left-aligned inside
+     .container, so its left edge matches every other homepage section. */
+  --research-frame: 960px;
   --radius: 18px;
   --radius-sm: 10px;
 }
@@ -210,9 +216,18 @@ p {
   text-wrap: balance;
 }
 
+/* The frame wrapper (see --research-frame). Used inside .container on the
+   overview section and on every research detail page. */
+.research-frame {
+  max-width: var(--research-frame);
+}
+
+/* Intro spans the frame like the rows below it (2–3 lines on a desktop
+   monitor) instead of the .lede's narrow 640px measure. */
 .research-intro {
   margin-top: 16px;
-  max-width: 620px;
+  max-width: none;
+  text-wrap: pretty;
 }
 
 .research-list {
@@ -246,8 +261,7 @@ p {
 }
 
 #research .research-row__desc {
-  max-width: 60ch;
-  color: var(--ink-secondary);
+  color: var(--ink-muted);
   line-height: 1.6;
   text-wrap: pretty;
 }
@@ -292,6 +306,126 @@ p {
 
   #research .research-row__desc {
     max-width: none;
+  }
+}
+
+/* Research detail pages (src/pages/research/[slug].astro).
+   One shared frame for every area: .container (--container, 1120px, 24px
+   side padding, the same frame as the homepage sections) holding a
+   .research-frame (--research-frame, 960px). Title, subheadings, prose,
+   tags, the "People in this area" eyebrow and the people grid all share
+   that frame's left AND right edges — there is no separate inner prose
+   width, so the page never jumps wider at the people grid. Readability
+   comes from size, leading and paragraph breaks instead. No cards,
+   backgrounds or icons — spacing and one hairline only. */
+.research-detail {
+  min-height: 0;
+  align-items: flex-start;
+  padding: 56px 0 96px;
+}
+
+.research-detail__title {
+  margin-top: 28px;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.research-detail__section {
+  margin-top: 24px;
+}
+
+/* Subsections (the two use cases on AI Agents) read as distinct items:
+   extra space plus the site's hairline rule, spanning the frame. */
+.research-detail__section + .research-detail__section {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.research-detail__subheading {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.research-detail__prose {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.research-detail__subheading + .research-detail__prose {
+  margin-top: 12px;
+}
+
+.research-detail__prose + .research-detail__prose {
+  margin-top: 0.85em;
+}
+
+.research-detail__prose a {
+  color: var(--cardinal);
+  text-decoration: none;
+}
+
+.research-detail__prose a:hover {
+  text-decoration: underline;
+}
+
+.research-detail__tags {
+  margin-top: 32px;
+}
+
+.research-detail__people {
+  margin-top: 56px;
+}
+
+/* Equal-width cells: 5 across the frame on desktop, 4 on tablets, 2 on
+   phones. Every cell is one centered column — avatar above name, sharing
+   the cell's horizontal center, with the fixed 14px avatar-to-name gap
+   from .person-meta — so nothing depends on how long a name is. Cells
+   auto-place from the left: fewer than five people start at the frame's
+   left edge and a single person takes the first cell. */
+.research-detail__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 36px 28px;
+  align-items: start;
+  margin-top: 16px;
+}
+
+.research-detail__grid .person-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+}
+
+.research-detail__grid .person-meta {
+  width: 100%;
+}
+
+/* Names get the full cell width; a name that must wrap does so in balanced
+   lines, still centered, without moving its neighbours' avatars. */
+.research-detail__grid .row__title {
+  max-width: 100%;
+  text-wrap: balance;
+}
+
+@media (max-width: 860px) {
+  .research-detail__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px 16px;
+  }
+}
+
+@media (max-width: 700px) {
+  .research-detail__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

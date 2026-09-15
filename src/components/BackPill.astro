@@ -5,11 +5,14 @@
 // back to the original inline "← DASH Lab" text link.
 interface Props {
   href: string;
+  /** Width (px) of the page's centered content frame. The desktop rail fills
+      the space to its left. Defaults to the 640px member column. */
+  column?: number;
 }
-const { href } = Astro.props;
+const { href, column = 640 } = Astro.props;
 ---
 
-<a href={href} class="back-rail" aria-label="Back to DASH Lab">
+<a href={href} class="back-rail" aria-label="Back to DASH Lab" style={`--rail-column: ${column}px;`}>
   <span class="back-rail__arrow" aria-hidden="true">&larr;</span>
 </a>
 <a href={href} class="back-link">&larr; DASH Lab</a>
@@ -37,9 +40,9 @@ const { href } = Astro.props;
       left: 0;
       bottom: 0;
       /* Fill everything from the screen edge to just before the
-         centered 640px text column (.member-container), minus a
-         16px breathing gap. */
-      width: calc(50% - 336px);
+         centered content frame (--rail-column wide, e.g. the 640px
+         member column), minus a 16px breathing gap. */
+      width: calc(50% - var(--rail-column) / 2 - 16px);
       display: flex;
       align-items: center;
       justify-content: flex-start;
