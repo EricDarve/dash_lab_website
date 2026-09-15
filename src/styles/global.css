@@ -317,6 +317,28 @@ a.row:hover .row__title {
   color: var(--cardinal);
 }
 
+/* External-link arrow on News rows that point off-site. Glued to the last
+   word of the title (nowrap) so it never orphans onto its own line; muted
+   at rest, tints cardinal with the title and nudges up-right on hover. */
+.row__title-tail {
+  white-space: nowrap;
+}
+
+.row__ext {
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  margin-left: 0.3em;
+  vertical-align: 0.18em;
+  color: var(--ink-secondary);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+a.row:hover .row__ext {
+  color: var(--cardinal);
+  transform: translate(1px, -1px);
+}
+
 .row__desc {
   margin: 0;
 }

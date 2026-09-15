@@ -19,6 +19,25 @@ const initials = (name: string) =>
 
 const lastName = (name: string) => name.split(" ").pop() ?? name;
 
+// News dates are "YYYY-MM-DD" or "YYYY-MM" (see content.config.ts):
+// "2026-08-05" -> "August 5, 2026", "2025-10" -> "October 2025".
+const formatNewsDate = (date: string) => {
+  const [year, month, day] = date.split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day ?? 1)).toLocaleDateString("en-US", {
+    timeZone: "UTC",
+    year: "numeric",
+    month: "long",
+    ...(day ? { day: "numeric" } : {}),
+  });
+};
+
+// Split off the last word so the external-link arrow can be glued to it
+// (nowrap) and never wraps onto a line of its own.
+const splitLastWord = (text: string): [string, string] => {
+  const i = text.lastIndexOf(" ");
+  return i === -1 ? ["", text] : [text.slice(0, i + 1), text.slice(i + 1)];
+};
+
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 const peopleGroups = [
@@ -155,15 +174,42 @@ const peopleGroups = [
 
       <div class="stack" style="margin-top: 32px;">
         {
-          news.map((item) => (
-            <a class="row" href={item.data.url ?? "#news"} target="_blank" rel="noopener">
-              <div>
-                <span class="row__index">{item.data.date}</span>
-                <h3 class="row__title">{item.data.title}</h3>
-              </div>
-              <p class="row__desc">{item.data.summary}</p>
-            </a>
-          ))
+          news.map((item) => {
+            const [titleHead, titleTail] = splitLastWord(item.data.title);
+            const body = (
+              <>
+                <div>
+                  <time class="row__index" datetime={item.data.date}>
+                    {formatNewsDate(item.data.date)}
+                  </time>
+                  <h3 class="row__title">
+                    {item.data.url ? (
+                      <>
+                        {titleHead}
+                        <span class="row__title-tail">
+                          {titleTail}
+                          <svg class="row__ext" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                            <path d="M4 12 12 4M6 4h6v6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        </span>
+                      </>
+                    ) : (
+                      item.data.title
+                    )}
+                  </h3>
+                </div>
+                <p class="row__desc">{item.data.summary}</p>
+              </>
+            );
+            // Items without a public page render as plain rows, not links.
+            return item.data.url ? (
+              <a class="row" href={item.data.url} target="_blank" rel="noopener">
+                {body}
+              </a>
+            ) : (
+              <div class="row">{body}</div>
+            );
+          })
         }
       </div>
     </div>

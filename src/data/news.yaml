@@ -1,11 +1,64 @@
-# CURATED, VERIFIED-ONLY LIST. Public search coverage of lab-specific news was
-# thin — TODO before launch: ask Eric directly for a "wins" list (recent
-# talks, awards, defenses) to extend this. Grant/funding news is
-# intentionally excluded — kept private, not advertised on the site.
+# Lab news, newest first. This list was supplied by Eric Darve on 2026-09-15
+# and is the authoritative content for the News section on the homepage.
+#
+# `date` must be "YYYY-MM-DD", or "YYYY-MM" when only the month is known —
+# the page formats it as "August 5, 2026" / "October 2025" and sorts by it.
+# `url` is the public page the entry links to. `sourceUrl` is where the claim
+# can be verified; when an item comes straight from Eric with no public page,
+# omit it and note the provenance in a comment instead.
 
-- id: "icme-20th-anniversary-2024"
-  date: "2024-11-21"
-  title: "ICME celebrates its 20th anniversary"
-  summary: "Stanford ICME, directed by Eric Darve, marked its 20th anniversary with a celebration on November 21–22, 2024."
-  url: "https://icme.stanford.edu/news/icme-20"
-  sourceUrl: "https://icme.stanford.edu/news/icme-20"
+- id: "courtesy-appointment-cs-2026"
+  date: "2026-08-05"
+  title: "Eric Darve’s courtesy appointment in Computer Science approved"
+  summary: "Prof. Eric Darve’s appointment as Professor of Computer Science, by courtesy, at Stanford University was approved on August 5, 2026."
+  # No announcement page exists yet (checked 2026-09-15: the CS department's
+  # courtesy-faculty directory does not list him, and the Stanford Report's
+  # periodic "Report of the president" appointment lists stop at April 2026).
+  # The Stanford Profiles page lists "Professor (By courtesy), Computer
+  # Science" under Academic Appointments; the approval date is per Eric.
+  url: "https://profiles.stanford.edu/eric-darve"
+  sourceUrl: "https://profiles.stanford.edu/eric-darve"
+
+- id: "genesis-mission-oracle-2026"
+  date: "2026-07-22"
+  title: "DASH Lab receives DOE Genesis Mission award for ORACLE"
+  summary: "Led by Prof. Eric Darve, ORACLE will develop AI agentic workflows for analyzing large experimental datasets in particle physics, with a focus on the Deep Underground Neutrino Experiment (DUNE). The project brings together Stanford and SLAC researchers through the Department of Energy’s Genesis Mission."
+  url: "https://news.stanford.edu/stories/2026/07/stanford-and-slac-to-lead-genesis-mission-projects-that-tackle-the-nation-s-most-complex-science-and-technology-challenges"
+  sourceUrl: "https://news.stanford.edu/stories/2026/07/stanford-and-slac-to-lead-genesis-mission-projects-that-tackle-the-nation-s-most-complex-science-and-technology-challenges"
+
+- id: "genesis-mission-subsurface-energy-2026"
+  date: "2026-07-22"
+  title: "Eric Darve joins Genesis Mission project on subsurface energy"
+  summary: "Prof. Eric Darve is co-PI on a DOE Genesis Mission project led by Prof. Hamdi Tchelepi. The team will develop specialized AI agents to simulate underground rock fractures, check results against physical laws, and quantify uncertainty, supporting geothermal and other subsurface energy applications."
+  url: "https://news.stanford.edu/stories/2026/07/stanford-and-slac-to-lead-genesis-mission-projects-that-tackle-the-nation-s-most-complex-science-and-technology-challenges"
+  sourceUrl: "https://news.stanford.edu/stories/2026/07/stanford-and-slac-to-lead-genesis-mission-projects-that-tackle-the-nation-s-most-complex-science-and-technology-challenges"
+
+- id: "commencement-2026"
+  date: "2026-06-14"
+  title: "Celebrating Stanford and ICME’s Class of 2026"
+  summary: "Congratulations to the Stanford and ICME graduates of 2026! We celebrate their accomplishments and wish them success in their next steps in research, industry, and beyond."
+  url: "https://commencement.stanford.edu/events/commencement/2026-commencement-ceremony"
+  sourceUrl: "https://commencement.stanford.edu/events/commencement/2026-commencement-ceremony"
+
+- id: "icme-research-symposium-2026"
+  date: "2026-05-19"
+  title: "ICME Research Symposium explores AI for Science and Engineering"
+  summary: "The 2026 ICME Research Symposium brought together faculty, students, and industry partners for talks, discussions, and student posters on AI for Science and Engineering. Prof. Eric Darve delivered opening and closing remarks and participated in a fireside discussion."
+  url: "https://icme.stanford.edu/events/research-symposium-seminars/icme-research-symposium-2026"
+  sourceUrl: "https://icme.stanford.edu/events/research-symposium-seminars/icme-research-symposium-2026"
+
+- id: "icme-career-forum-2025"
+  date: "2025-11-07"
+  title: "ICME Career Forum connects students with industry and national labs"
+  summary: "The 2025 ICME Career Forum brought Stanford students and faculty together with representatives from industry and national laboratories for a day of networking, interviews, and career conversations at the Huang Engineering Center."
+  url: "https://icme.stanford.edu/events/career-forum-education/icme-career-forum-2025"
+  sourceUrl: "https://icme.stanford.edu/events/career-forum-education/icme-career-forum-2025"
+
+- id: "llm-interpretability-alignment-award-2025"
+  date: "2025-10"
+  title: "DASH Lab receives funding for LLM interpretability and alignment"
+  summary: "The DASH Lab received an award from Open Philanthropy to support research on large language model interpretability and alignment. The organization is now known as Coefficient Giving."
+  url: "https://coefficientgiving.org/research/open-philanthropy-is-now-coefficient-giving/"
+  # The linked page verifies the Open Philanthropy → Coefficient Giving rename;
+  # the award itself was reported by Eric Darve directly (2026-09-15).
+  sourceUrl: "https://coefficientgiving.org/research/open-philanthropy-is-now-coefficient-giving/"

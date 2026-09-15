@@ -44,11 +44,17 @@ const publications = defineCollection({
 const news = defineCollection({
   loader: file("./src/data/news.yaml"),
   schema: z.object({
-    date: z.string(),
+    // "YYYY-MM-DD", or "YYYY-MM" when only the month is known. Kept as a
+    // string so entries sort newest-first with a plain string compare.
+    date: z
+      .string()
+      .regex(/^\d{4}-\d{2}(-\d{2})?$/, 'date must be "YYYY-MM-DD" or "YYYY-MM"'),
     title: z.string(),
     summary: z.string(),
-    url: z.string().optional(),
-    sourceUrl: z.string(),
+    url: z.string().url().optional(),
+    // Where the claim can be verified. Only omitted for items Eric supplied
+    // directly that have no public page (note the provenance in a comment).
+    sourceUrl: z.string().url().optional(),
   }),
 });
 
