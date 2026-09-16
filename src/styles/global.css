@@ -58,10 +58,15 @@ a {
   padding: 0 24px;
 }
 
+/* Sections size to their content plus 88px padding. They used to be at
+   least one viewport tall with the content centered, which on tall monitors
+   left empty bands far larger than the page's spacing rhythm (e.g. 285px
+   above and below the Research rows on a 1440px-tall display). Removed
+   2026-09-16 after Eric's "too much white space"; the padding itself is
+   unchanged. */
 .section {
   padding: 88px 0;
-  min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 0;
   display: flex;
   align-items: center;
   scroll-margin-top: 76px;
@@ -71,9 +76,14 @@ a {
   width: 100%;
 }
 
+/* The hero still opens as a tall panel, but capped: it fills the viewport
+   below the nav on short windows and stops at 640px on taller ones. It was
+   always viewport height — 824px on a 900px-tall laptop, 1364px on a
+   1440px-tall display — leaving ~300–560px of empty space above and below
+   242px of text, the one clear outlier in the page's spacing (2026-09-16). */
 .hero {
-  min-height: calc(100vh - 76px);
-  min-height: calc(100dvh - 76px);
+  min-height: min(calc(100vh - 76px), 640px);
+  min-height: min(calc(100dvh - 76px), 640px);
 }
 
 .hero__content {

@@ -15,6 +15,7 @@
 // `pills` lists the matching entries in src/data/researchStreams.ts (the same
 // tags used on people's profiles) — an area can span more than one pill, and
 // every pill in the list is used to find people who work in this area.
+// `collaborators` adds people who work in the area but are not lab members.
 // `description` (the short homepage row text) is the first sentence of the
 // first section, taken verbatim.
 
@@ -31,11 +32,25 @@ export interface ResearchSection {
   links: ResearchLink[];
 }
 
+// Someone who works in an area without being a lab member: no roster entry,
+// no member page. Shown in "People in this area" with the same card as
+// members, linking to an external profile instead (LinkedIn by convention).
+export interface ResearchCollaborator {
+  name: string;
+  /** Context such as "Master's Student, ICME"; shown as the card's tooltip. */
+  role?: string;
+  /** External profile the card links to. */
+  url: string;
+  /** Optional /people/… path under public/; initials are shown otherwise. */
+  photo?: string;
+}
+
 interface ResearchAreaInput {
   title: string;
   slug: string;
   sections: ResearchSection[];
   pills: string[];
+  collaborators?: ResearchCollaborator[];
 }
 
 export interface ResearchArea extends ResearchAreaInput {
@@ -123,6 +138,16 @@ export const researchAreas: ResearchArea[] = [
       },
     ],
     pills: ["interpretability", "ai-safety"],
+    // Not a lab member; listed here at Eric's request (2026-09-16). Photo is
+    // his public GitHub avatar (github.com/h1ppox99), rehosted as 288px WebP.
+    collaborators: [
+      {
+        name: "Hippolyte Wallaert",
+        role: "Master's Student, ICME",
+        url: "https://www.linkedin.com/in/hippolyte-wallaert-617449297",
+        photo: "/people/hippolyte-wallaert.webp",
+      },
+    ],
   },
   {
     title: "Scientific Machine Learning for Faster Simulation and Physical Insight",

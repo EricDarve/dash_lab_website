@@ -43,6 +43,26 @@ const initials = (name: string) =>
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
+// One list for the people grid: lab members (from tags, linking to their
+// member page) plus the area's collaborators (not members, linking to an
+// external profile), sorted together by last name.
+const areaPeople = [
+  ...relatedPeople.map((person) => ({
+    name: person.data.name,
+    href: `${base}/member/${person.id}/`,
+    photo: person.data.photo ? `${base}${person.data.photo}` : undefined,
+    title: undefined as string | undefined,
+    external: false,
+  })),
+  ...(area.collaborators ?? []).map((c) => ({
+    name: c.name,
+    href: c.url,
+    photo: c.photo ? `${base}${c.photo}` : undefined,
+    title: c.role,
+    external: true,
+  })),
+].sort((a, b) => lastName(a.name).localeCompare(lastName(b.name)));
+
 // The outer page frame is the site-wide .container (--container in
 // global.css); BackPill's desktop rail needs the number so it stops short
 // of it. Inside, .research-frame (--research-frame) bounds the content.
@@ -83,20 +103,26 @@ const FRAME_WIDTH = 1120;
         ))}
       </div>
 
-      {relatedPeople.length > 0 && (
+      {areaPeople.length > 0 && (
         <div class="research-detail__people">
           <p class="eyebrow">People in this area</p>
           <div class="research-detail__grid">
-            {relatedPeople.map((person) => (
-              <a href={`${base}/member/${person.id}/`} class="person-card">
+            {areaPeople.map((person) => (
+              <a
+                href={person.href}
+                class="person-card"
+                title={person.title}
+                target={person.external ? "_blank" : undefined}
+                rel={person.external ? "noopener" : undefined}
+              >
                 <div class="person-meta">
-                  {person.data.photo ? (
-                    <img src={`${base}${person.data.photo}`} alt={person.data.name} class="avatar" width="84" height="84" loading="lazy" decoding="async" />
+                  {person.photo ? (
+                    <img src={person.photo} alt={person.name} class="avatar" width="84" height="84" loading="lazy" decoding="async" />
                   ) : (
-                    <div class="avatar avatar--initials">{initials(person.data.name)}</div>
+                    <div class="avatar avatar--initials">{initials(person.name)}</div>
                   )}
                   <div class="person-meta__text">
-                    <h3 class="row__title">{person.data.name}</h3>
+                    <h3 class="row__title">{person.name}</h3>
                   </div>
                 </div>
               </a>

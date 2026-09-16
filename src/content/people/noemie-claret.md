@@ -2,7 +2,7 @@
 name: Noémie Claret
 role: PhD Student, ICME
 category: phd
-pills: [ml-science-engineering, interpretability]
+pills: [ml-science-engineering, interpretability, computational-imaging]
 photo: /people/noemie-claret.webp
 links:
   website: https://www.linkedin.com/in/noemie-claret/
@@ -17,4 +17,7 @@ for crystallography, and is co-advised by Eric Darve and Frederic
 Poitevin. She has a background in mathematics and her interests lie
 broadly at the intersection of statistics, optimization, and scientific
 machine learning.
-<!-- Bio provided by Kirill on Noémie's behalf, 2026-08-20. -->
+<!-- Bio provided by Kirill on Noémie's behalf, 2026-08-20.
+     computational-imaging tag added 2026-09-16 at Eric's request (she is a
+     co-author of the LCLS wavelet/crystallography image-segmentation paper,
+     arXiv:2605.19199, linked from the Fast Algorithms research area). -->

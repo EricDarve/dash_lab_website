@@ -24,4 +24,11 @@ He has subject-matter expertise in uncertainty quantification, machine
 learning (including operator learning and graph neural networks), and
 multi-physics modeling, and has published 10+ journal papers in high-impact
 venues spanning computational physics and numerical methods.
-<!-- Source: bio provided directly by Søren -->
+<!-- Source: bio provided directly by Søren.
+     Photo: the portrait from his site (chameleon20.github.io/images/profile.png,
+     same image as the original in this repo); re-cropped 2026-09-16 at Eric's
+     request to center the face. The original is cropped at the top of his
+     hair, so headroom cannot be added; the 288×288 WebP (q80, like the other
+     photos) is a 94% square from the top of the 1500px original with the
+     plain backdrop extended ~11% on the left (edge column replicated) so his
+     face sits on the centre line. Person untouched. -->
