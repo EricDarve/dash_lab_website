@@ -24,11 +24,21 @@ const people = await getCollection("people");
 
 const lastName = (name: string) => name.split(" ").pop() ?? name;
 
+// A mistyped id would silently list the person again, so fail the build.
+const excluded = area.excludePeople ?? [];
+const unknownExcluded = excluded.filter((id) => !people.some((p) => p.id === id));
+if (unknownExcluded.length > 0) {
+  throw new Error(
+    `researchAreas "${area.slug}": excludePeople has unknown ids: ${unknownExcluded.join(", ")}`
+  );
+}
+
 const relatedPeople = people
   .filter(
     (person) =>
       !person.data.placeholder &&
       person.data.category !== "alumni" &&
+      !excluded.includes(person.id) &&
       person.data.pills?.some((slug) => area.pills.includes(slug))
   )
   .sort((a, b) => lastName(a.data.name).localeCompare(lastName(b.data.name)));

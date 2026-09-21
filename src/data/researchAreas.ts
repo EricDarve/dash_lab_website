@@ -16,6 +16,8 @@
 // tags used on people's profiles) — an area can span more than one pill, and
 // every pill in the list is used to find people who work in this area.
 // `collaborators` adds people who work in the area but are not lab members.
+// `excludePeople` lists people ids (src/content/people/<id>.md) whose tags
+// match the area but who should not be listed on its page.
 // `description` (the short homepage row text) is the first sentence of the
 // first section, taken verbatim.
 
@@ -51,6 +53,7 @@ interface ResearchAreaInput {
   sections: ResearchSection[];
   pills: string[];
   collaborators?: ResearchCollaborator[];
+  excludePeople?: string[];
 }
 
 export interface ResearchArea extends ResearchAreaInput {
@@ -173,6 +176,16 @@ export const researchAreas: ResearchArea[] = [
       },
     ],
     pills: ["ai-for-science", "ml-science-engineering"],
+    // Per Eric (2026-09-18): these members' tags are broad enough to match
+    // this area, but they do not work in it. Their tags and their listings on
+    // other research pages are unchanged.
+    excludePeople: [
+      "maximilian-sabayev",
+      "jonathan-thompson",
+      "sreya-vangara",
+      "john-winnicki",
+      "junlin-luo",
+    ],
   },
 ].map(withDescription);
 
