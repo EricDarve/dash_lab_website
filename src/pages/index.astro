@@ -62,6 +62,22 @@ const peopleGroups = [
       }),
   }))
   .filter((group) => group.members.length > 0);
+
+// Small groups (the PI, a lone research scientist) share one row instead of
+// each taking a full-width row for a single card; larger groups get a row of
+// their own. Consecutive small groups are collected into the same row.
+const INLINE_GROUP_MAX = 3;
+type PeopleRow = { inline: boolean; groups: typeof peopleGroups };
+const peopleRows = peopleGroups.reduce<PeopleRow[]>((rows, group) => {
+  const inline = group.members.length <= INLINE_GROUP_MAX;
+  const last = rows[rows.length - 1];
+  if (inline && last?.inline) {
+    last.groups.push(group);
+  } else {
+    rows.push({ inline, groups: [group] });
+  }
+  return rows;
+}, []);
 ---
 
 <BaseLayout>
@@ -87,47 +103,51 @@ const peopleGroups = [
       <h2>Research Team</h2>
 
       {
-        peopleGroups.map((group) => (
-          <div class="people-group" style="margin-top: 40px;">
-            <h3 class="people-group__heading">{group.label}</h3>
-            <div class="people-grid" style="margin-top: 16px;">
-              {group.members.map((person) =>
-                person.data.placeholder ? (
-                  <div class="person-card person-card--placeholder">
-                    <div class="person-meta">
-                      <div class="avatar avatar--placeholder">+</div>
-                      <div class="person-meta__text">
-                        <h3 class="row__title">{person.data.name}</h3>
+        peopleRows.map((row) => (
+          <div class={row.inline ? "people-row people-row--inline" : "people-row"}>
+            {row.groups.map((group) => (
+              <div class="people-group" style={`--span: ${Math.max(2, group.members.length)};`}>
+                <h3 class="people-group__heading">{group.label}</h3>
+                <div class="people-grid" style="margin-top: 16px;">
+                  {group.members.map((person) =>
+                    person.data.placeholder ? (
+                      <div class="person-card person-card--placeholder">
+                        <div class="person-meta">
+                          <div class="avatar avatar--placeholder">+</div>
+                          <div class="person-meta__text">
+                            <h3 class="row__title">{person.data.name}</h3>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                ) : (
-                  <a
-                    href={`${base}/member/${person.id}/`}
-                    class={person.data.category === "pi" ? "person-card person-card--pi" : "person-card"}
-                    data-pills={person.data.pills?.join(",") ?? ""}
-                  >
-                    <div class="person-meta">
-                      {person.data.photo ? (
-                        <img src={`${base}${person.data.photo}`} alt={person.data.name} class="avatar" width="84" height="84" loading="lazy" decoding="async" />
-                      ) : (
-                        <div class="avatar avatar--initials">{initials(person.data.name)}</div>
-                      )}
-                      <div class="person-meta__text">
-                        <h3 class="row__title">{person.data.name}</h3>
-                      </div>
-                    </div>
-                    {person.data.category !== "alumni" && person.data.pills && person.data.pills.length > 0 && (
-                      <div class="pill-row pill-row--center" style="margin-top: 14px;">
-                        {person.data.pills.slice(0, 2).map((slug) => (
-                          <span class="tag" data-pill={slug}>{researchStreamLabel(slug)}</span>
-                        ))}
-                      </div>
+                    ) : (
+                      <a
+                        href={`${base}/member/${person.id}/`}
+                        class={person.data.category === "pi" ? "person-card person-card--pi" : "person-card"}
+                        data-pills={person.data.pills?.join(",") ?? ""}
+                      >
+                        <div class="person-meta">
+                          {person.data.photo ? (
+                            <img src={`${base}${person.data.photo}`} alt={person.data.name} class="avatar" width="84" height="84" loading="lazy" decoding="async" />
+                          ) : (
+                            <div class="avatar avatar--initials">{initials(person.data.name)}</div>
+                          )}
+                          <div class="person-meta__text">
+                            <h3 class="row__title">{person.data.name}</h3>
+                          </div>
+                        </div>
+                        {person.data.category !== "alumni" && person.data.pills && person.data.pills.length > 0 && (
+                          <div class="pill-row pill-row--center" style="margin-top: 14px;">
+                            {person.data.pills.slice(0, 2).map((slug) => (
+                              <span class="tag" data-pill={slug}>{researchStreamLabel(slug)}</span>
+            ))}
+          </div>
                     )}
                   </a>
                 )
               )}
             </div>
+          </div>
+          ))}
           </div>
         ))
       }

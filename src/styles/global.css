@@ -58,14 +58,13 @@ a {
   padding: 0 24px;
 }
 
-/* Sections size to their content plus 88px padding. They used to be at
-   least one viewport tall with the content centered, which on tall monitors
-   left empty bands far larger than the page's spacing rhythm (e.g. 285px
-   above and below the Research rows on a 1440px-tall display). Removed
-   2026-09-16 after Eric's "too much white space"; the padding itself is
-   unchanged. */
+/* Sections size to their content plus 64px padding, so consecutive sections
+   sit 128px apart. They used to be at least one viewport tall with the
+   content centered (removed 2026-09-16 after Eric's "too much white space"),
+   then 88px padded, i.e. 160–176px between sections; tightened 2026-09-21
+   after his "too much vertical padding". */
 .section {
-  padding: 88px 0;
+  padding: 64px 0;
   min-height: 0;
   display: flex;
   align-items: center;
@@ -76,14 +75,16 @@ a {
   width: 100%;
 }
 
-/* The hero still opens as a tall panel, but capped: it fills the viewport
-   below the nav on short windows and stops at 640px on taller ones. It was
-   always viewport height — 824px on a 900px-tall laptop, 1364px on a
-   1440px-tall display — leaving ~300–560px of empty space above and below
-   242px of text, the one clear outlier in the page's spacing (2026-09-16). */
+/* The hero is a compact masthead sized to its text, on the same white as the
+   rest of the page with no rule or band under it — it is separated from
+   People by the same whitespace as every other pair of sections — so the
+   People section starts within the first screen. It used to be a tall panel
+   (viewport height, later capped at 640px) with ~240px of text floating in
+   the middle — 200px of blank space above it and 290px below, which is what
+   Eric's 2026-09-17 screenshot shows. Phones take the shared .section
+   padding further down. */
 .hero {
-  min-height: min(calc(100vh - 76px), 640px);
-  min-height: min(calc(100dvh - 76px), 640px);
+  padding-top: 72px;
 }
 
 .hero__content {
@@ -203,7 +204,7 @@ p {
   grid-template-columns: minmax(180px, 260px) 1fr;
   align-items: center;
   gap: 32px;
-  padding: 36px 0;
+  padding: 28px 0;
   border-top: 1px solid var(--border);
   text-decoration: none;
   color: inherit;
@@ -215,11 +216,6 @@ p {
    them. Rows are links to /research/<slug> and hover like the News list
    (title tints cardinal via the global a.row:hover rule; no band, no
    chevron). Everything is scoped to #research / .research-*. */
-#research {
-  padding-top: 72px;
-  padding-bottom: 72px;
-}
-
 /* One line on desktop; wraps naturally only when the viewport forces it.
    Size stays on the global h2 scale to match People and News. */
 .research-headline {
@@ -240,10 +236,17 @@ p {
   text-wrap: pretty;
 }
 
+/* 32px + the first row's 28px padding: the same heading-to-first-row
+   distance as the News list. The last row drops its bottom padding so the
+   section ends on the shared 64px like People and News. */
 .research-list {
   list-style: none;
-  margin: 56px 0 0;
+  margin: 32px 0 0;
   padding: 0;
+}
+
+#research .research-list__item:last-child .research-row {
+  padding-bottom: 0;
 }
 
 #research .research-row {
@@ -311,7 +314,7 @@ p {
   }
 
   .research-list {
-    margin-top: 40px;
+    margin-top: 24px;
   }
 
   #research .research-row__desc {
@@ -540,6 +543,14 @@ a.row:hover .row__ext {
   color: var(--cardinal);
 }
 
+.people-row {
+  margin-top: 40px;
+}
+
+.people-row--inline .people-group + .people-group {
+  margin-top: 40px;
+}
+
 .people-grid {
   display: flex;
   flex-wrap: wrap;
@@ -550,6 +561,82 @@ a.row:hover .row__ext {
 @media (max-width: 700px) {
   .people-grid {
     justify-content: center;
+  }
+}
+
+/* The roster is one column grid spanning the container, so its right edge
+   lines up with the News rows instead of stopping wherever the last 168px
+   card happened to land: 2 columns on phones, then 4 / 5 / 6. Every group
+   uses the same tracks: a full-width group fills them left to right, and the
+   small groups sharing a row (see peopleRows in index.astro) each span as
+   many tracks as they have people, minimum two — so on a desktop the PI and
+   the research scientists sit side by side above the first and third student
+   columns. Below 380px the flex layout above still applies (one centered
+   card per line): two columns there are narrower than the longest tag
+   ("Computational Imaging", 156px). */
+@media (min-width: 380px) {
+  #people {
+    --people-cols: 2;
+    --people-gap: 32px 16px;
+  }
+
+  #people .people-row--inline,
+  #people .people-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--people-cols), minmax(0, 1fr));
+    gap: var(--people-gap);
+    align-items: start;
+  }
+
+  #people .people-row--inline {
+    row-gap: 40px;
+  }
+
+  #people .people-row--inline .people-group {
+    grid-column: span var(--span);
+    margin-top: 0;
+  }
+
+  #people .people-row--inline .people-grid {
+    grid-template-columns: repeat(var(--span), minmax(0, 1fr));
+  }
+
+  #people .person-card {
+    width: 100%;
+    min-width: 0;
+  }
+
+  #people .person-card .row__title {
+    text-wrap: balance;
+  }
+}
+
+/* Phones: a group of one (the PI) stays centered rather than sitting in the
+   left of two columns. */
+@media (min-width: 380px) and (max-width: 700px) {
+  #people .people-grid > .person-card:only-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 8px);
+  }
+}
+
+@media (min-width: 701px) {
+  #people {
+    --people-cols: 4;
+    --people-gap: 36px 28px;
+  }
+}
+
+@media (min-width: 900px) {
+  #people {
+    --people-cols: 5;
+  }
+}
+
+@media (min-width: 1100px) {
+  #people {
+    --people-cols: 6;
   }
 }
 
