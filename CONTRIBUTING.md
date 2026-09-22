@@ -191,3 +191,5 @@ unrelated content unless your change specifically requires it.
 If you use Claude Code, Codex, or another coding agent, ask it to follow
 this CONTRIBUTING.md, make only the requested content change, run
 `npm run build`, and show you the diff before opening a pull request.
+
+<!-- PR workflow test -->
