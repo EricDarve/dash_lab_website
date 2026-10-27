@@ -543,6 +543,34 @@ a.row:hover .row__ext {
   color: var(--cardinal);
 }
 
+/* Under the roster on the homepage, centered and spanning the middle
+   --photo-cols columns of the people grid so its edges land on the grid's
+   column lines (middle 4 of 6, 3 of 5, all 4 on tablets, full width on
+   phones). The gap is a little larger than between people groups. */
+.group-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 56px auto 0;
+  border-radius: var(--radius);
+}
+
+@media (min-width: 701px) {
+  #people .group-photo {
+    --photo-cols: var(--people-cols);
+    width: calc(
+      (100% - (var(--people-cols) - 1) * 28px) / var(--people-cols) * var(--photo-cols)
+      + (var(--photo-cols) - 1) * 28px
+    );
+  }
+}
+
+@media (min-width: 900px) {
+  #people .group-photo {
+    --photo-cols: calc(var(--people-cols) - 2);
+  }
+}
+
 .people-row {
   margin-top: 40px;
 }
@@ -625,6 +653,36 @@ a.row:hover .row__ext {
   #people {
     --people-cols: 4;
     --people-gap: 36px 28px;
+  }
+
+  /* The row of small groups (PI, research scientists, postdocs) splits the
+     width into equal columns, with each heading centered over its people,
+     so the row reads as symmetric instead of hanging off the student grid
+     tracks. */
+  #people .people-row--inline {
+    display: flex;
+    gap: 28px;
+  }
+
+  #people .people-row--inline .people-group {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: center;
+  }
+
+  #people .people-row--inline .people-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #people .people-row--inline .person-card {
+    width: 168px;
+  }
+
+  /* Full-width groups (PhD students, …) center their heading to match. */
+  #people .people-group__heading {
+    text-align: center;
   }
 }
 

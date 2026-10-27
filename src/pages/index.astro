@@ -85,7 +85,7 @@ const peopleRows = peopleGroups.reduce<PeopleRow[]>((rows, group) => {
     <div class="container">
       <div class="hero__content">
         <p class="eyebrow">Stanford University</p>
-        <h1><span class="accent">DASH</span> Lab</h1>
+        <h1><span class="accent">Darve</span> Lab</h1>
         <p class="hero-tagline" style="margin-top: 16px;">
           Reliable AI for Science and Engineering
         </p>
@@ -152,6 +152,17 @@ const peopleRows = peopleGroups.reduce<PeopleRow[]>((rows, group) => {
         ))
       }
 
+      <img
+        src={`${base}/group-photo-2400.webp`}
+        srcset={`${base}/group-photo-1200.webp 1200w, ${base}/group-photo-2400.webp 2400w`}
+        sizes="(min-width: 1100px) 720px, (min-width: 900px) 600px, calc(100vw - 32px)"
+        alt="Members of the Darve Lab standing together outside a Stanford building"
+        class="group-photo"
+        width="2400"
+        height="1600"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
   </section>
 
@@ -161,7 +172,7 @@ const peopleRows = peopleGroups.reduce<PeopleRow[]>((rows, group) => {
       <p class="eyebrow">Research</p>
       <h2 class="research-headline">Reliable AI for Science and Engineering</h2>
       <p class="lede research-intro">
-        The DASH Lab develops algorithms and AI systems that make scientific
+        The Darve Lab develops algorithms and AI systems that make scientific
         computation faster, experimental data easier to use, and results easier
         to understand and verify. Our research connects numerical methods,
         machine learning, and scientific applications.
