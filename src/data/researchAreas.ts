@@ -142,7 +142,7 @@ export const researchAreas: ResearchArea[] = [
     ],
     pills: ["interpretability", "ai-safety"],
     // Not a lab member; listed here at Eric's request (2026-09-16). Photo is
-    // his public GitHub avatar (github.com/h1ppox99), rehosted as 288px WebP.
+    // from the lab photo shoot (2026-10), as a 288px WebP.
     collaborators: [
       {
         name: "Hippolyte Wallaert",
